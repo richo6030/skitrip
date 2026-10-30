@@ -1,0 +1,109 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+collections:
+  - name: "trip"
+    label: "Обща информация"
+    files:
+      - label: "Детайли за трипа"
+        name: "trip"
+        file: "content/trip.json"
+        format: json
+        fields:
+          - { label: "Заглавие", name: "title", widget: "string" }
+          - { label: "Подзаглавие", name: "subtitle", widget: "string" }
+          - label: "Дати"
+            name: "dates"
+            widget: "object"
+            fields:
+              - { label: "Тръгване от София", name: "departure", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false }
+              - { label: "Пристигане в Доломитите", name: "arrival_resort", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false }
+              - { label: "Тръгване обратно", name: "departure_back", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false }
+              - { label: "Пристигане в София", name: "arrival_sofia", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false }
+          - label: "Настаняване"
+            name: "accommodation"
+            widget: "object"
+            fields:
+              - { label: "Име", name: "name", widget: "string" }
+              - { label: "Адрес", name: "address", widget: "string", required: false }
+              - { label: "Google Maps линк", name: "maps_link", widget: "string", required: false }
+              - { label: "Check-in", name: "checkin", widget: "string", required: false }
+              - { label: "Check-out", name: "checkout", widget: "string", required: false }
+              - { label: "Бележки", name: "notes", widget: "text", required: false }
+          - { label: "Hero tagline", name: "hero_tagline", widget: "string", required: false }
+
+  - name: "route"
+    label: "Маршрут"
+    files:
+      - label: "Спирки по маршрута"
+        name: "route"
+        file: "content/route.json"
+        format: json
+        fields:
+          - label: "Спирки"
+            name: "stops"
+            widget: "list"
+            fields:
+              - { label: "Град / Място", name: "name", widget: "string" }
+              - { label: "Държава", name: "country", widget: "string", required: false }
+              - { label: "Тип", name: "type", widget: "select", options: ["Тръгване", "Почивка", "Гориво", "Нощувка", "Пристигане"], default: "Почивка" }
+              - { label: "Прогнозно време", name: "eta", widget: "string", required: false, hint: "Напр. 10:00 или ~6 часа от старта" }
+              - { label: "Google Maps линк", name: "maps_link", widget: "string", required: false }
+              - { label: "Бележки", name: "notes", widget: "text", required: false }
+
+  - name: "cars"
+    label: "Коли"
+    files:
+      - label: "Автомобили и пътници"
+        name: "cars"
+        file: "content/cars.json"
+        format: json
+        fields:
+          - label: "Коли"
+            name: "cars"
+            widget: "list"
+            fields:
+              - { label: "Шофьор", name: "driver", widget: "string" }
+              - { label: "Кола (марка/модел)", name: "car", widget: "string" }
+              - { label: "Цвят", name: "color", widget: "string", required: false }
+              - { label: "Пътници", name: "passengers", widget: "list", field: { label: "Пътник", name: "name", widget: "string" } }
+              - { label: "Бележки", name: "notes", widget: "text", required: false }
+
+  - name: "group"
+    label: "Група"
+    files:
+      - label: "Участници"
+        name: "group"
+        file: "content/group.json"
+        format: json
+        fields:
+          - label: "Участници"
+            name: "members"
+            widget: "list"
+            fields:
+              - { label: "Име", name: "name", widget: "string" }
+              - { label: "Роля / Бележка", name: "role", widget: "string", required: false }
+              - { label: "Телефон", name: "phone", widget: "string", required: false }
+
+  - name: "skipasses"
+    label: "Ски карти"
+    files:
+      - label: "Ски карти и информация"
+        name: "skipasses"
+        file: "content/skipasses.json"
+        format: json
+        fields:
+          - label: "Карти"
+            name: "passes"
+            widget: "list"
+            fields:
+              - { label: "Вид карта", name: "name", widget: "string" }
+              - { label: "Дни", name: "days", widget: "number", required: false }
+              - { label: "Цена (approx.)", name: "price", widget: "string", required: false }
+              - { label: "Линк", name: "link", widget: "string", required: false }
+              - { label: "Бележки", name: "notes", widget: "text", required: false }
+          - { label: "Обща информация / Бележки", name: "notes", widget: "text", required: false }

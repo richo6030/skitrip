@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ски Трип Доломити 2027</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d1117;
+      --bg2:       #161b22;
+      --bg3:       #21262d;
+      --border:    #30363d;
+      --accent:    #4a9eff;
+      --accent2:   #a78bfa;
+      --text:      #e6edf3;
+      --muted:     #8b949e;
+      --snow:      #f0f6fc;
+      --success:   #3fb950;
+      --nav-w:     260px;
+      --radius:    12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* ── Sidebar nav ── */
+    nav {
+      width: var(--nav-w);
+      min-height: 100vh;
+      background: var(--bg2);
+      border-right: 1px solid var(--border);
+      position: fixed;
+      top: 0; left: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 0 0 2rem;
+      z-index: 100;
+      transition: transform .3s ease;
+    }
+
+    .nav-logo {
+      padding: 1.8rem 1.5rem 1.2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo .trip-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--snow);
+      line-height: 1.3;
+    }
+
+    .nav-logo .trip-sub {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: .3rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      list-style: none;
+      padding: 1rem 0;
+      flex: 1;
+    }
+
+    .nav-links li a {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      padding: .65rem 1.5rem;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: .875rem;
+      font-weight: 500;
+      border-left: 3px solid transparent;
+      transition: all .18s ease;
+    }
+
+    .nav-links li a:hover,
+    .nav-links li a.active {
+      color: var(--text);
+      background: rgba(74,158,255,.08);
+      border-left-color: var(--accent);
+    }
+
+    .nav-links li a .icon { font-size: 1rem; width: 1.2rem; text-align: center; }
+
+    .nav-bottom {
+      padding: 1rem 1.5rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .nav-bottom a {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: .8rem;
+      color: var(--muted);
+      text-decoration: none;
+      padding: .5rem 0;
+      transition: color .18s;
+    }
+
+    .nav-bottom a:hover { color: var(--accent); }
+
+    /* ── Main content ── */
+    main {
+      margin-left: var(--nav-w);
+      flex: 1;
+      padding: 0;
+    }
+
+    section {
+      display: none;
+      padding: 2.5rem 3rem;
+      max-width: 960px;
+      animation: fadeIn .25s ease;
+    }
+
+    section.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Hero ── */
+    #home {
+      padding: 0;
+      max-width: 100%;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #0d1f3c 0%, #1a1040 50%, #0d1117 100%);
+      padding: 5rem 3rem 4rem;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(74,158,255,.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: 30%;
+      width: 500px; height: 300px;
+      background: radial-gradient(circle, rgba(167,139,250,.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: .75rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      color: var(--snow);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .hero-tagline {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    .date-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+    }
+
+    .date-badge {
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: .6rem 1rem;
+      font-size: .8rem;
+    }
+
+    .date-badge .label {
+      display: block;
+      color: var(--muted);
+      font-size: .7rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: .2rem;
+    }
+
+    .date-badge .val { color: var(--snow); font-weight: 600; }
+
+    .home-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+      padding: 2.5rem 3rem;
+    }
+
+    .home-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      cursor: pointer;
+      transition: all .2s ease;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .home-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.3);
+    }
+
+    .home-card .card-icon { font-size: 1.8rem; margin-bottom: .75rem; }
+    .home-card .card-title { font-weight: 600; font-size: .95rem; margin-bottom: .3rem; }
+    .home-card .card-desc { font-size: .8rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── Section headers ── */
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-icon { font-size: 2rem; line-height: 1; margin-top: .1rem; }
+
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--snow);
+    }
+
+    .section-header p {
+      font-size: .85rem;
+      color: var(--muted);
+      margin-top: .3rem;
+    }
+
+    /* ── Cards & panels ── */
+    .card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--snow);
+      margin-bottom: .75rem;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: .75rem;
+    }
+
+    .info-item .label {
+      font-size: .72rem;
+      color: var(--muted);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: .25rem;
+    }
+
+    .info-item .value {
+      font-size: .9rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ── Timeline ── */
+    .timeline { position: relative; padding-left: 2rem; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: .55rem; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 1.25rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -1.55rem;
+      top: .35rem;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--bg3);
+      border: 2px solid var(--border);
+      transition: border-color .2s;
+    }
+
+    .timeline-item.type-start::before,
+    .timeline-item.type-arrive::before { border-color: var(--success); background: var(--success); }
+    .timeline-item.type-stop::before { border-color: var(--accent); }
+    .timeline-item.type-fuel::before { border-color: #f0883e; }
+    .timeline-item.type-overnight::before { border-color: var(--accent2); }
+
+    .timeline-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+    }
+
+    .timeline-card .stop-name {
+      font-weight: 600;
+      font-size: .95rem;
+      color: var(--snow);
+    }
+
+    .timeline-card .stop-meta {
+      font-size: .78rem;
+      color: var(--muted);
+      margin-top: .2rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .timeline-card .stop-notes {
+      font-size: .82rem;
+      color: var(--muted);
+      margin-top: .6rem;
+      padding-top: .6rem;
+      border-top: 1px solid var(--border);
+      line-height: 1.5;
+    }
+
+    .stop-type-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+      font-size: .7rem;
+      font-weight: 600;
+      padding: .15rem .55rem;
+      border-radius: 20px;
+      letter-spacing: .04em;
+    }
+
+    .badge-start    { background: rgba(63,185,80,.15);  color: var(--success); }
+    .badge-stop     { background: rgba(74,158,255,.15); color: var(--accent); }
+    .badge-fuel     { background: rgba(240,136,62,.15); color: #f0883e; }
+    .badge-overnight{ background: rgba(167,139,250,.15);color: var(--accent2); }
+    .badge-arrive   { background: rgba(63,185,80,.15);  color: var(--success); }
+
+    .maps-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+      font-size: .78rem;
+      color: var(--accent);
+      text-decoration: none;
+      margin-top: .5rem;
+    }
+
+    .maps-link:hover { text-decoration: underline; }
+
+    /* ── Car cards ── */
+    .cars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .car-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+    }
+
+    .car-card .car-header {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: 1rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .car-icon { font-size: 1.8rem; }
+
+    .car-card .car-name { font-weight: 700; font-size: 1rem; color: var(--snow); }
+    .car-card .car-driver { font-size: .8rem; color: var(--muted); margin-top: .1rem; }
+
+    .passengers-list { list-style: none; }
+    .passengers-list li {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .35rem 0;
+      font-size: .875rem;
+      color: var(--text);
+      border-bottom: 1px solid rgba(48,54,61,.5);
+    }
+    .passengers-list li:last-child { border-bottom: none; }
+    .passengers-list li::before { content: '→'; color: var(--muted); font-size: .8rem; }
+
+    /* ── Group ── */
+    .group-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: .75rem;
+    }
+
+    .member-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+    }
+
+    .member-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: .95rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .member-name { font-weight: 600; font-size: .9rem; color: var(--snow); }
+    .member-role { font-size: .75rem; color: var(--muted); margin-top: .1rem; }
+
+    /* ── Ski passes ── */
+    .passes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .pass-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pass-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+
+    .pass-card .pass-name { font-weight: 700; font-size: 1rem; color: var(--snow); margin-bottom: .5rem; }
+    .pass-card .pass-days { font-size: .8rem; color: var(--muted); margin-bottom: .25rem; }
+    .pass-card .pass-price { font-size: 1.1rem; font-weight: 700; color: var(--accent); margin: .5rem 0; }
+    .pass-card .pass-notes { font-size: .8rem; color: var(--muted); line-height: 1.5; margin-top: .5rem; }
+
+    /* ── Accommodation ── */
+    .accommodation-hero {
+      background: linear-gradient(135deg, #1a1f2e, #1e1435);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .accommodation-hero::after {
+      content: '🏨';
+      position: absolute;
+      right: 1.5rem; top: 50%;
+      transform: translateY(-50%);
+      font-size: 4rem;
+      opacity: .15;
+    }
+
+    .accommodation-hero h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--snow);
+      margin-bottom: .5rem;
+    }
+
+    /* ── Empty state ── */
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--muted);
+    }
+
+    .empty-state .empty-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .empty-state p { font-size: .9rem; line-height: 1.6; }
+    .empty-state .hint { font-size: .8rem; color: var(--border); margin-top: .5rem; }
+
+    /* ── Countdown ── */
+    .countdown-strip {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .countdown-unit {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.4rem;
+      text-align: center;
+      min-width: 90px;
+    }
+
+    .countdown-unit .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .countdown-unit .lbl {
+      font-size: .7rem;
+      color: var(--muted);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-top: .3rem;
+    }
+
+    /* ── Responsive ── */
+    .hamburger {
+      display: none;
+      position: fixed;
+      top: 1rem; left: 1rem;
+      z-index: 200;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .5rem .65rem;
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+
+    @media (max-width: 768px) {
+      nav { transform: translateX(-100%); }
+      nav.open { transform: translateX(0); }
+      main { margin-left: 0; }
+      .hamburger { display: block; }
+      section { padding: 4rem 1.25rem 2rem; }
+      .hero { padding: 4rem 1.25rem 3rem; }
+      .home-cards { padding: 1.5rem 1.25rem; }
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.5);
+      z-index: 99;
+    }
+
+    .overlay.show { display: block; }
+  </style>
+</head>
+<body>
+
+<button class="hamburger" id="hamburger" onclick="toggleNav()">☰</button>
+<div class="overlay" id="overlay" onclick="toggleNav()"></div>
+
+<nav id="sidenav">
+  <div class="nav-logo">
+    <div class="trip-name" id="nav-title">Ски Трип Доломити 2027</div>
+    <div class="trip-sub" id="nav-sub">Февруари – Март 2027</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showSection('home')" class="active" data-section="home"><span class="icon">🏠</span> Начало</a></li>
+    <li><a href="#" onclick="showSection('route')" data-section="route"><span class="icon">🗺️</span> Маршрут</a></li>
+    <li><a href="#" onclick="showSection('accommodation')" data-section="accommodation"><span class="icon">🏨</span> Нощувки</a></li>
+    <li><a href="#" onclick="showSection('cars')" data-section="cars"><span class="icon">🚗</span> Коли</a></li>
+    <li><a href="#" onclick="showSection('group')" data-section="group"><span class="icon">👥</span> Група</a></li>
+    <li><a href="#" onclick="showSection('skipasses')" data-section="skipasses"><span class="icon">🎿</span> Ски карти</a></li>
+  </ul>
+  <div class="nav-bottom">
+    <a href="/admin" target="_blank">⚙️ Admin панел</a>
+  </div>
+</nav>
+
+<main>
+  <!-- HOME -->
+  <section id="home" class="active">
+    <div class="hero">
+      <div class="hero-eyebrow">ONE TRIP · ONE MOUNTAIN · ONE CREW</div>
+      <h1 id="hero-title">Ски Трип<br/>Доломити 2027</h1>
+      <p class="hero-tagline" id="hero-tagline">Шест дни в Алпите. Едно незабравимо приключение.</p>
+      <div class="date-badges" id="date-badges"></div>
+    </div>
+
+    <div style="padding: 2rem 3rem 0;">
+      <div style="margin-bottom:.5rem; font-size:.8rem; color:var(--muted); text-transform:uppercase; letter-spacing:.08em;">Обратно броене до заминаването</div>
+      <div class="countdown-strip" id="countdown"></div>
+    </div>
+
+    <div class="home-cards">
+      <a class="home-card" onclick="showSection('route')">
+        <div class="card-icon">🗺️</div>
+        <div class="card-title">Маршрут</div>
+        <div class="card-desc">Спирки, Google Maps линкове и прогнозни времена по пътя.</div>
+      </a>
+      <a class="home-card" onclick="showSection('accommodation')">
+        <div class="card-icon">🏨</div>
+        <div class="card-title">Нощувки</div>
+        <div class="card-desc">Grifone Dolomiti Resort — адрес, check-in/out и детайли.</div>
+      </a>
+      <a class="home-card" onclick="showSection('cars')">
+        <div class="card-icon">🚗</div>
+        <div class="card-title">Коли</div>
+        <div class="card-desc">Кой с кого пътува и кой шофира.</div>
+      </a>
+      <a class="home-card" onclick="showSection('group')">
+        <div class="card-icon">👥</div>
+        <div class="card-title">Група</div>
+        <div class="card-desc">Всички участници и контакти.</div>
+      </a>
+      <a class="home-card" onclick="showSection('skipasses')">
+        <div class="card-icon">🎿</div>
+        <div class="card-title">Ски карти</div>
+        <div class="card-desc">Видове карти, цени и линкове за покупка.</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ROUTE -->
+  <section id="route">
+    <div class="section-header">
+      <div class="section-icon">🗺️</div>
+      <div>
+        <h2>Маршрут</h2>
+        <p>Пътят от София до Доломитите и обратно</p>
+      </div>
+    </div>
+    <div id="route-content"></div>
+  </section>
+
+  <!-- ACCOMMODATION -->
+  <section id="accommodation">
+    <div class="section-header">
+      <div class="section-icon">🏨</div>
+      <div>
+        <h2>Нощувки</h2>
+        <p>Къде спим в Доломитите</p>
+      </div>
+    </div>
+    <div id="accommodation-content"></div>
+  </section>
+
+  <!-- CARS -->
+  <section id="cars">
+    <div class="section-header">
+      <div class="section-icon">🚗</div>
+      <div>
+        <h2>Коли</h2>
+        <p>Автомобили и разпределение на пътниците</p>
+      </div>
+    </div>
+    <div id="cars-content"></div>
+  </section>
+
+  <!-- GROUP -->
+  <section id="group">
+    <div class="section-header">
+      <div class="section-icon">👥</div>
+      <div>
+        <h2>Група</h2>
+        <p>Всички участници в трипа</p>
+      </div>
+    </div>
+    <div id="group-content"></div>
+  </section>
+
+  <!-- SKI PASSES -->
+  <section id="skipasses">
+    <div class="section-header">
+      <div class="section-icon">🎿</div>
+      <div>
+        <h2>Ски карти</h2>
+        <p>Видове карти, цени и линкове</p>
+      </div>
+    </div>
+    <div id="skipasses-content"></div>
+  </section>
+</main>
+
+<script>
+  // ── Navigation ──────────────────────────────────────────
+  function showSection(id) {
+    document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    const link = document.querySelector(`[data-section="${id}"]`);
+    if (link) link.classList.add('active');
+    if (window.innerWidth <= 768) {
+      document.getElementById('sidenav').classList.remove('open');
+      document.getElementById('overlay').classList.remove('show');
+    }
+  }
+
+  function toggleNav() {
+    document.getElementById('sidenav').classList.toggle('open');
+    document.getElementById('overlay').classList.toggle('show');
+  }
+
+  // ── Fetch JSON helper ──────────────────────────────────
+  async function load(path) {
+    try {
+      const r = await fetch(path + '?t=' + Date.now());
+      if (!r.ok) return null;
+      return await r.json();
+    } catch { return null; }
+  }
+
+  // ── Date formatting ────────────────────────────────────
+  function fmtDate(str) {
+    if (!str) return '—';
+    const d = new Date(str);
+    return d.toLocaleDateString('bg-BG', { day: 'numeric', month: 'long', year: 'numeric' });
+  }
+
+  // ── Countdown ─────────────────────────────────────────
+  function buildCountdown(departure) {
+    const el = document.getElementById('countdown');
+    if (!departure || !el) return;
+    const diff = new Date(departure) - new Date();
+    if (diff <= 0) {
+      el.innerHTML = '<div style="color:var(--success);font-weight:600;">Трипът е в ход! ⛷️</div>';
+      return;
+    }
+    const days    = Math.floor(diff / 86400000);
+    const hours   = Math.floor((diff % 86400000) / 3600000);
+    const minutes = Math.floor((diff % 3600000) / 60000);
+    const units   = [['дни', days], ['часа', hours], ['минути', minutes]];
+    el.innerHTML = units.map(([lbl, num]) =>
+      `<div class="countdown-unit"><div class="num">${num}</div><div class="lbl">${lbl}</div></div>`
+    ).join('');
+  }
+
+  // ── Stop type helpers ──────────────────────────────────
+  const typeMap = {
+    'Тръгване':  { badge: 'badge-start',     icon: '🚀' },
+    'Почивка':   { badge: 'badge-stop',      icon: '☕' },
+    'Гориво':    { badge: 'badge-fuel',      icon: '⛽' },
+    'Нощувка':   { badge: 'badge-overnight', icon: '🌙' },
+    'Пристигане':{ badge: 'badge-arrive',    icon: '🏁' },
+  };
+
+  const typeClass = {
+    'Тръгване':  'type-start',
+    'Пристигане':'type-arrive',
+    'Нощувка':   'type-overnight',
+    'Гориво':    'type-fuel',
+    'Почивка':   'type-stop',
+  };
+
+  // ── Render functions ───────────────────────────────────
+  function renderHome(trip) {
+    if (!trip) return;
+    if (trip.title) {
+      document.getElementById('hero-title').innerHTML = trip.title.replace(' ', '<br/>');
+      document.getElementById('nav-title').textContent = trip.title;
+      document.title = trip.title;
+    }
+    if (trip.hero_tagline) document.getElementById('hero-tagline').textContent = trip.hero_tagline;
+    if (trip.subtitle)     document.getElementById('nav-sub').textContent = trip.subtitle;
+
+    const badges = document.getElementById('date-badges');
+    if (trip.dates) {
+      const d = trip.dates;
+      const items = [
+        ['Тръгване от София', d.departure],
+        ['Пристигане в Доломитите', d.arrival_resort],
+        ['Тръгване обратно', d.departure_back],
+        ['Пристигане в София', d.arrival_sofia],
+      ];
+      badges.innerHTML = items.map(([lbl, val]) =>
+        `<div class="date-badge"><span class="label">${lbl}</span><span class="val">${fmtDate(val)}</span></div>`
+      ).join('');
+      buildCountdown(d.departure);
+    }
+  }
+
+  function renderRoute(data) {
+    const el = document.getElementById('route-content');
+    if (!data || !data.stops || data.stops.length === 0) {
+      el.innerHTML = `<div class="empty-state"><div class="empty-icon">🗺️</div><p>Маршрутът все още не е добавен.<br/>Добави спирки от <a href="/admin" style="color:var(--accent)">Admin панела</a>.</p></div>`;
+      return;
+    }
+    el.innerHTML = `<div class="timeline">${data.stops.map(stop => {
+      const t  = typeMap[stop.type] || typeMap['Почивка'];
+      const tc = typeClass[stop.type] || 'type-stop';
+      const mapsBtn = stop.maps_link
+        ? `<a href="${stop.maps_link}" target="_blank" class="maps-link">📍 Google Maps</a>`
+        : '';
+      const notes = stop.notes
+        ? `<div class="stop-notes">${stop.notes}</div>` : '';
+      return `
+        <div class="timeline-item ${tc}">
+          <div class="timeline-card">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;">
+              <div class="stop-name">${t.icon} ${stop.name}${stop.country ? ` <span style="font-weight:400;color:var(--muted);font-size:.85rem;">· ${stop.country}</span>` : ''}</div>
+              <span class="stop-type-badge ${t.badge}">${stop.type}</span>
+            </div>
+            <div class="stop-meta">
+              ${stop.eta ? `<span>⏱ ${stop.eta}</span>` : ''}
+            </div>
+            ${mapsBtn}
+            ${notes}
+          </div>
+        </div>`;
+    }).join('')}</div>`;
+  }
+
+  function renderAccommodation(trip) {
+    const el = document.getElementById('accommodation-content');
+    if (!trip || !trip.accommodation || !trip.accommodation.name) {
+      el.innerHTML = `<div class="empty-state"><div class="empty-icon">🏨</div><p>Информацията за настаняване ще бъде добавена скоро.</p></div>`;
+      return;
+    }
+    const a = trip.accommodation;
+    const mapsBtn = a.maps_link
+      ? `<a href="${a.maps_link}" target="_blank" class="maps-link" style="margin-top:.75rem;display:inline-flex;">📍 Виж на Google Maps</a>`
+      : '';
+    el.innerHTML = `
+      <div class="accommodation-hero">
+        <h3>${a.name}</h3>
+        ${a.address ? `<p style="color:var(--muted);font-size:.9rem;margin-top:.3rem;">📍 ${a.address}</p>` : ''}
+        ${mapsBtn}
+      </div>
+      <div class="info-grid">
+        ${a.checkin  ? `<div class="info-item"><div class="label">Check-in</div><div class="value">${a.checkin}</div></div>` : ''}
+        ${a.checkout ? `<div class="info-item"><div class="label">Check-out</div><div class="value">${a.checkout}</div></div>` : ''}
+        ${a.notes    ? `<div class="card" style="margin-top:1rem;grid-column:1/-1;"><h3>Бележки</h3><p style="color:var(--muted);font-size:.875rem;line-height:1.7;">${a.notes}</p></div>` : ''}
+      </div>`;
+  }
+
+  function renderCars(data) {
+    const el = document.getElementById('cars-content');
+    if (!data || !data.cars || data.cars.length === 0) {
+      el.innerHTML = `<div class="empty-state"><div class="empty-icon">🚗</div><p>Колите и пътниците ще бъдат добавени скоро.<br/>Добави от <a href="/admin" style="color:var(--accent)">Admin панела</a>.</p></div>`;
+      return;
+    }
+    el.innerHTML = `<div class="cars-grid">${data.cars.map(car => `
+      <div class="car-card">
+        <div class="car-header">
+          <div class="car-icon">🚗</div>
+          <div>
+            <div class="car-name">${car.car}${car.color ? ` <span style="font-weight:400;color:var(--muted);">(${car.color})</span>` : ''}</div>
+            <div class="car-driver">Шофьор: ${car.driver}</div>
+          </div>
+        </div>
+        ${car.passengers && car.passengers.length > 0
+          ? `<ul class="passengers-list">${car.passengers.map(p => `<li>${p}</li>`).join('')}</ul>`
+          : '<p style="font-size:.8rem;color:var(--muted);">Няма добавени пътници</p>'}
+        ${car.notes ? `<p style="font-size:.78rem;color:var(--muted);margin-top:.75rem;padding-top:.75rem;border-top:1px solid var(--border);">${car.notes}</p>` : ''}
+      </div>`).join('')}</div>`;
+  }
+
+  function renderGroup(data) {
+    const el = document.getElementById('group-content');
+    if (!data || !data.members || data.members.length === 0) {
+      el.innerHTML = `<div class="empty-state"><div class="empty-icon">👥</div><p>Участниците ще бъдат добавени скоро.<br/>Добави от <a href="/admin" style="color:var(--accent)">Admin панела</a>.</p></div>`;
+      return;
+    }
+    el.innerHTML = `<div class="group-grid">${data.members.map(m => {
+      const initials = m.name.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+      return `
+        <div class="member-card">
+          <div class="member-avatar">${initials}</div>
+          <div>
+            <div class="member-name">${m.name}</div>
+            ${m.role  ? `<div class="member-role">${m.role}</div>` : ''}
+            ${m.phone ? `<div class="member-role">📞 ${m.phone}</div>` : ''}
+          </div>
+        </div>`;
+    }).join('')}</div>`;
+  }
+
+  function renderSkiPasses(data) {
+    const el = document.getElementById('skipasses-content');
+    if (!data || (!data.passes?.length && !data.notes)) {
+      el.innerHTML = `<div class="empty-state"><div class="empty-icon">🎿</div><p>Информацията за ски картите ще бъде добавена скоро.<br/>Добави от <a href="/admin" style="color:var(--accent)">Admin панела</a>.</p></div>`;
+      return;
+    }
+    const notesBlock = data.notes
+      ? `<div class="card" style="margin-bottom:1.5rem;"><h3>Обща информация</h3><p style="color:var(--muted);font-size:.875rem;line-height:1.7;white-space:pre-line;">${data.notes}</p></div>`
+      : '';
+    const passes = (data.passes || []).map(p => `
+      <div class="pass-card">
+        <div class="pass-name">${p.name}</div>
+        ${p.days  ? `<div class="pass-days">⏱ ${p.days} ${p.days == 1 ? 'ден' : 'дни'}</div>` : ''}
+        ${p.price ? `<div class="pass-price">${p.price}</div>` : ''}
+        ${p.link  ? `<a href="${p.link}" target="_blank" class="maps-link">🔗 Купи / Виж детайли</a>` : ''}
+        ${p.notes ? `<div class="pass-notes">${p.notes}</div>` : ''}
+      </div>`).join('');
+    el.innerHTML = notesBlock + (passes ? `<div class="passes-grid">${passes}</div>` : '');
+  }
+
+  // ── Boot ───────────────────────────────────────────────
+  async function init() {
+    const [trip, route, cars, group, skipasses] = await Promise.all([
+      load('/content/trip.json'),
+      load('/content/route.json'),
+      load('/content/cars.json'),
+      load('/content/group.json'),
+      load('/content/skipasses.json'),
+    ]);
+
+    renderHome(trip);
+    renderRoute(route);
+    renderAccommodation(trip);
+    renderCars(cars);
+    renderGroup(group);
+    renderSkiPasses(skipasses);
+  }
+
+  init();
+</script>
+</body>
+</html>
