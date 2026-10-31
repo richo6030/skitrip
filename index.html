@@ -1121,16 +1121,15 @@
           </div>
         </div>`;
     }).join('');
-    el.innerHTML = intro + `<div class="skiday-grid">${days}</div>` + `
-      <div class="card" style="margin-top:1.5rem;">
-        <h3 style="margin-bottom:.75rem;">🗺️ Полезни линкове</h3>
-        <div style="display:flex;flex-wrap:wrap;gap:.75rem;">
-          <a href="https://www.dolomitisuperski.com/en/ski-area/the-sella-ronda" target="_blank" class="maps-link">🔄 Sella Ronda официална страница</a>
-          <a href="https://www.dolomitisuperski.com/en/mountain/webcams" target="_blank" class="maps-link">📷 Уеб камери на писти</a>
-          <a href="https://www.dolomitisuperski.com/en/mountain/snow-report" target="_blank" class="maps-link">❄️ Снежен отчет</a>
-          <a href="https://www.dolomitisuperski.com/en/ski-area/ski-map" target="_blank" class="maps-link">🗺️ Ски карта (PDF)</a>
-        </div>
-      </div>`;
+    const linksBlock = data.links && data.links.length
+      ? `<div class="card" style="margin-top:1.5rem;">
+          <h3 style="margin-bottom:.75rem;">🗺️ Полезни линкове</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:.75rem;">
+            ${data.links.map(l => `<a href="${l.url}" target="_blank" class="maps-link">${l.icon ? l.icon + ' ' : ''}${l.label}</a>`).join('')}
+          </div>
+        </div>`
+      : '';
+    el.innerHTML = intro + `<div class="skiday-grid">${days}</div>` + linksBlock;
   }
 
   // ── Boot ───────────────────────────────────────────────
