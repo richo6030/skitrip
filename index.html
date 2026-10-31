@@ -609,6 +609,131 @@
     }
 
     .overlay.show { display: block; }
+
+    /* ── Ski Plan ── */
+    .skiday-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .skiday-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skiday-card--featured {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(74,158,255,.2), 0 4px 24px rgba(74,158,255,.08);
+      grid-column: 1 / -1;
+    }
+
+    .skiday-header {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: .75rem;
+    }
+
+    .skiday-badge {
+      background: var(--bg3);
+      color: var(--accent);
+      font-size: .75rem;
+      font-weight: 700;
+      padding: .25rem .65rem;
+      border-radius: 99px;
+      border: 1px solid var(--border);
+      letter-spacing: .04em;
+    }
+
+    .skiday-badge--special {
+      background: rgba(74,158,255,.15);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .skiday-date {
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    .skiday-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--snow);
+      margin-bottom: .3rem;
+      line-height: 1.4;
+    }
+
+    .skiday-area {
+      font-size: .75rem;
+      color: var(--accent2);
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .skiday-plan {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      margin-bottom: 1rem;
+    }
+
+    .skiday-step {
+      display: flex;
+      gap: .65rem;
+      font-size: .83rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .step-time {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: .78rem;
+      white-space: nowrap;
+      min-width: 3.2rem;
+      padding-top: .05rem;
+    }
+
+    .skiday-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      padding-top: .75rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .skiday-stats span {
+      font-size: .75rem;
+      background: var(--bg3);
+      padding: .2rem .6rem;
+      border-radius: 99px;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .sella-ronda-badge {
+      position: absolute;
+      top: 1.1rem;
+      right: 1.1rem;
+      background: var(--accent);
+      color: #000;
+      font-size: .65rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      padding: .2rem .55rem;
+      border-radius: 99px;
+    }
+
+    @media (max-width: 768px) {
+      .skiday-grid { grid-template-columns: 1fr; }
+      .skiday-card--featured { grid-column: auto; }
+    }
   </style>
 </head>
 <body>
@@ -628,6 +753,7 @@
     <li><a href="#" onclick="showSection('cars')" data-section="cars"><span class="icon">🚗</span> Коли</a></li>
     <li><a href="#" onclick="showSection('group')" data-section="group"><span class="icon">👥</span> Група</a></li>
     <li><a href="#" onclick="showSection('skipasses')" data-section="skipasses"><span class="icon">🎿</span> Ски карти</a></li>
+    <li><a href="#" onclick="showSection('skiplan')" data-section="skiplan"><span class="icon">⛷️</span> Ски план</a></li>
   </ul>
   <div class="nav-bottom">
     <a href="/admin" target="_blank">⚙️ Admin панел</a>
@@ -736,6 +862,158 @@
       </div>
     </div>
     <div id="skipasses-content"></div>
+  </section>
+
+  <!-- SKI PLAN -->
+  <section id="skiplan">
+    <div class="section-header">
+      <div class="section-icon">⛷️</div>
+      <div>
+        <h2>Ски план – 5 дни</h2>
+        <p>Дolomiti Superski · База: Канацей, Вал ди Фаса</p>
+      </div>
+    </div>
+
+    <div class="skiplan-intro card" style="margin-bottom:1.5rem;">
+      <p style="color:var(--muted);font-size:.9rem;line-height:1.75;">
+        Хотел <strong style="color:var(--text);">Grifone Dolomiti Resort</strong> се намира в <strong style="color:var(--text);">Канацей</strong>, Вал ди Фаса —
+        директен достъп до лифтовете <strong style="color:var(--text);">Belvedere</strong> и <strong style="color:var(--text);">Col Rodella</strong>,
+        които са основни входни точки към веригата <strong style="color:var(--accent);">Sella Ronda</strong>.
+        Dolomiti Superski свързва 12 ски района, 1200 км писти и над 450 лифта.
+      </p>
+    </div>
+
+    <div class="skiday-grid">
+
+      <!-- Day 1 -->
+      <div class="skiday-card">
+        <div class="skiday-header">
+          <div class="skiday-badge">Ден 1</div>
+          <div class="skiday-date">Събота · 28 Февруари</div>
+        </div>
+        <div class="skiday-title">🏔️ Вал ди Фаса – Запознанство с района</div>
+        <div class="skiday-area">Zona Skiarea: Belvedere / Col Rodella</div>
+        <div class="skiday-plan">
+          <div class="skiday-step"><span class="step-time">09:00</span> Лифт <strong>Belvedere</strong> от Канацей (2,002 м) – загрявка на широките синьо-червени писти над хотела</div>
+          <div class="skiday-step"><span class="step-time">10:30</span> Гондола <strong>Col Rodella</strong> (2,484 м) – панорама на Мармолада и Селата; дълги червени спускания към Campitello</div>
+          <div class="skiday-step"><span class="step-time">12:30</span> Обяд в планинска хижа на Col Rodella</div>
+          <div class="skiday-step"><span class="step-time">14:00</span> Следобед: писти към Pera di Fassa и обратно по дълги сини трасета</div>
+          <div class="skiday-step"><span class="step-time">16:30</span> Край на деня – обратно в Канацей</div>
+        </div>
+        <div class="skiday-stats">
+          <span>📏 ~25 км писти</span>
+          <span>↕️ ~1,200 м денивелация</span>
+          <span>🟦🟥 Сини/Червени</span>
+        </div>
+      </div>
+
+      <!-- Day 2 -->
+      <div class="skiday-card">
+        <div class="skiday-header">
+          <div class="skiday-badge">Ден 2</div>
+          <div class="skiday-date">Неделя · 1 Март</div>
+        </div>
+        <div class="skiday-title">🔴 Арабба – Черните писти и Мармолада</div>
+        <div class="skiday-area">Zona Skiarea: Arabba / Marmolada</div>
+        <div class="skiday-plan">
+          <div class="skiday-step"><span class="step-time">08:30</span> Ранен старт – лифт Belvedere → Pordoi (2,239 м) → Arabba (1,602 м) по Sella Ronda маршрут (посока Оранжева)</div>
+          <div class="skiday-step"><span class="step-time">10:00</span> <strong>Arabba</strong> – най-стръмните писти в Доломитите; черни писти Burz и Porta Vescovo (2,478 м)</div>
+          <div class="skiday-step"><span class="step-time">12:00</span> Обяд в Arabba</div>
+          <div class="skiday-step"><span class="step-time">13:30</span> Гондола към <strong>Marmolada</strong> (3,265 м) – най-високата точка на Dolomiti Superski, глетчерски ски</div>
+          <div class="skiday-step"><span class="step-time">15:30</span> Обратно към Канацей по Pordoi и Belvedere</div>
+        </div>
+        <div class="skiday-stats">
+          <span>📏 ~30 км писти</span>
+          <span>↕️ ~1,800 м денивелация</span>
+          <span>🟥⬛ Червени/Черни</span>
+        </div>
+      </div>
+
+      <!-- Day 3 – Sella Ronda -->
+      <div class="skiday-card skiday-card--featured">
+        <div class="skiday-header">
+          <div class="skiday-badge skiday-badge--special">Ден 3 ⭐</div>
+          <div class="skiday-date">Понеделник · 2 Март</div>
+        </div>
+        <div class="skiday-title">🔄 Sella Ronda – Пълният кръг (Оранжева посока)</div>
+        <div class="skiday-area">Канацей → Арабба → Корвара → Селва → Канацей · ~26 км писти + 4 лифтни прехода</div>
+        <div class="skiday-plan">
+          <div class="skiday-step"><span class="step-time">08:00</span> <strong>Ранен старт!</strong> Лифт Belvedere от Канацей – изкачване към Pordoi (2,239 м)</div>
+          <div class="skiday-step"><span class="step-time">08:45</span> Спускане към <strong>Arabba</strong> (1,602 м) – Pordoi писта, ~8 км</div>
+          <div class="skiday-step"><span class="step-time">09:30</span> Лифт Porta Vescovo от Arabba → прелез към <strong>Corvara</strong> (1,568 м)</div>
+          <div class="skiday-step"><span class="step-time">10:30</span> Обяд-пауза в Corvara / Colfosco</div>
+          <div class="skiday-step"><span class="step-time">11:00</span> Лифт Campolongo → Passo Gardena (2,136 м) → спускане към <strong>Selva Val Gardena</strong> (1,563 м)</div>
+          <div class="skiday-step"><span class="step-time">12:30</span> Обяд в Selva – препоръчваме Rifugio Jimmy</div>
+          <div class="skiday-step"><span class="step-time">14:00</span> Лифт Dantercepies → Passo Sella (2,244 м) → спускане обратно към <strong>Канацей</strong></div>
+          <div class="skiday-step"><span class="step-time">16:00</span> Финал на кръга! Аперол Spritz в Канацей 🍊</div>
+        </div>
+        <div class="skiday-stats">
+          <span>📏 ~40 км писти</span>
+          <span>↕️ ~2,600 м денивелация</span>
+          <span>🔄 4 прохода</span>
+          <span>⏱ ~7 часа</span>
+        </div>
+        <div class="sella-ronda-badge">SELLA RONDA</div>
+      </div>
+
+      <!-- Day 4 -->
+      <div class="skiday-card">
+        <div class="skiday-header">
+          <div class="skiday-badge">Ден 4</div>
+          <div class="skiday-date">Вторник · 3 Март</div>
+        </div>
+        <div class="skiday-title">🌲 Вал Гардена – Селва и Санта Кристина</div>
+        <div class="skiday-area">Zona Skiarea: Val Gardena / Alpe di Siusi</div>
+        <div class="skiday-plan">
+          <div class="skiday-step"><span class="step-time">08:30</span> От Канацей – лифт Passo Sella → Selva Val Gardena за цял ден</div>
+          <div class="skiday-step"><span class="step-time">09:30</span> Писти Ciampinoi (2,254 м) – дълги червени спускания с изглед към Sassolungo</div>
+          <div class="skiday-step"><span class="step-time">11:00</span> Разходка към <strong>Alpe di Siusi</strong> (Seiser Alm) – най-голямото алпийско плато в Европа, идеално за начинаещи и средни</div>
+          <div class="skiday-step"><span class="step-time">13:00</span> Обяд в Compaccio / Compatsch на платото</div>
+          <div class="skiday-step"><span class="step-time">14:30</span> Обратно в Selva – следобед по писти Dantercepies</div>
+          <div class="skiday-step"><span class="step-time">16:30</span> Лифт обратно към Passo Sella → Канацей</div>
+        </div>
+        <div class="skiday-stats">
+          <span>📏 ~28 км писти</span>
+          <span>↕️ ~1,400 м денивелация</span>
+          <span>🟦🟥 Сини/Червени</span>
+        </div>
+      </div>
+
+      <!-- Day 5 -->
+      <div class="skiday-card">
+        <div class="skiday-header">
+          <div class="skiday-badge">Ден 5</div>
+          <div class="skiday-date">Сряда · 4 Март</div>
+        </div>
+        <div class="skiday-title">🌅 Вал ди Фаса – Последен ден, любими писти</div>
+        <div class="skiday-area">Zona Skiarea: Belvedere / Buffaure / Ciampedie</div>
+        <div class="skiday-plan">
+          <div class="skiday-step"><span class="step-time">09:00</span> Свободен ден – всеки избира любимите си писти от седмицата</div>
+          <div class="skiday-step"><span class="step-time">09:30</span> Препоръка: Кабинков лифт <strong>Ciampedie</strong> от Vigo di Fassa (2,000 м) – по-тихо, красиви гледки към Catinaccio</div>
+          <div class="skiday-step"><span class="step-time">11:00</span> <strong>Buffaure</strong> (2,354 м) – дълги, слабо натоварени червени и черни писти, любими от местните</div>
+          <div class="skiday-step"><span class="step-time">13:00</span> Прощален обяд в планинска хижа – препоръчваме <em>Rifugio Gardeccia</em></div>
+          <div class="skiday-step"><span class="step-time">15:00</span> Последно спускане → събиране на екипировката</div>
+          <div class="skiday-step"><span class="step-time">16:30</span> Край на ски сезона 🎿 Celebrate!</div>
+        </div>
+        <div class="skiday-stats">
+          <span>📏 ~20 км писти</span>
+          <span>↕️ ~1,000 м денивелация</span>
+          <span>🟦🟥⬛ Всички нива</span>
+        </div>
+      </div>
+
+    </div><!-- /skiday-grid -->
+
+    <div class="card" style="margin-top:1.5rem;">
+      <h3 style="margin-bottom:.75rem;">🗺️ Полезни линкове</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:.75rem;">
+        <a href="https://www.dolomitisuperski.com/en/ski-area/the-sella-ronda" target="_blank" class="maps-link">🔄 Sella Ronda официална страница</a>
+        <a href="https://www.dolomitisuperski.com/en/mountain/webcams" target="_blank" class="maps-link">📷 Уеб камери на писти</a>
+        <a href="https://www.dolomitisuperski.com/en/mountain/snow-report" target="_blank" class="maps-link">❄️ Снежен отчет</a>
+        <a href="https://www.dolomitisuperski.com/en/ski-area/ski-map" target="_blank" class="maps-link">🗺️ Ски карта (PDF)</a>
+      </div>
+    </div>
+
   </section>
 </main>
 
