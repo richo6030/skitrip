@@ -1,101 +1,207 @@
 {
   "intro": "Хотел Grifone Dolomiti Resort се намира в Канацей, Вал ди Фаса — директен достъп до лифтовете Belvedere и Col Rodella, които са основни входни точки към веригата Sella Ronda. Dolomiti Superski свързва 12 ски района, 1200 км писти и над 450 лифта.",
   "links": [
-    { "label": "Sella Ronda официална страница", "url": "https://www.dolomitisuperski.com/en/ski-area/the-sella-ronda", "icon": "🔄" },
-    { "label": "Уеб камери на писти", "url": "https://www.dolomitisuperski.com/en/mountain/webcams", "icon": "📷" },
-    { "label": "Снежен отчет", "url": "https://www.dolomitisuperski.com/en/mountain/snow-report", "icon": "❄️" },
-    { "label": "Ски карта (PDF)", "url": "https://www.dolomitisuperski.com/en/ski-area/ski-map", "icon": "🗺️" }
+    {
+      "label": "Sella Ronda официална страница",
+      "url": "https://www.dolomitisuperski.com/en/ski-area/the-sella-ronda",
+      "icon": "🔄"
+    },
+    {
+      "label": "Уеб камери на писти",
+      "url": "https://www.dolomitisuperski.com/it/live-info/webcam",
+      "icon": "📷"
+    },
+    {
+      "label": "Снежен отчет",
+      "url": "https://www.dolomitisuperski.com/en/mountain/snow-report",
+      "icon": "❄️"
+    },
+    {
+      "label": "Ски карта (PDF)",
+      "url": "https://www.dolomitisuperski.com/en/ski-area/ski-map",
+      "icon": "🗺️"
+    }
   ],
   "days": [
     {
-      "day": "Ден 1",
-      "date": "Събота · 28 Февруари",
-      "title": "Вал ди Фаса – Запознанство с района",
-      "area": "Belvedere / Col Rodella",
-      "steps": [
-        { "time": "09:00", "description": "Лифт Belvedere от Канацей (2,002 м) – загрявка на широките синьо-червени писти над хотела" },
-        { "time": "10:30", "description": "Гондола Col Rodella (2,484 м) – панорама на Мармолада и Селата; дълги червени спускания към Campitello" },
-        { "time": "12:30", "description": "Обяд в планинска хижа на Col Rodella" },
-        { "time": "14:00", "description": "Следобед: писти към Pera di Fassa и обратно по дълги сини трасета" },
-        { "time": "16:30", "description": "Край на деня – обратно в Канацей" }
-      ],
       "km": "~25 км писти",
+      "steps": [
+        {
+          "time": "09:00",
+          "description": "Лифт Belvedere от Канацей (2,002 м) – загрявка на широките синьо-червени писти над хотела"
+        },
+        {
+          "time": "10:30",
+          "description": "Гондола Col Rodella (2,484 м) – панорама на Мармолада и Селата; дълги червени спускания към Campitello"
+        },
+        {
+          "time": "12:30",
+          "description": "Обяд в планинска хижа на Col Rodella"
+        },
+        {
+          "time": "14:00",
+          "description": "Следобед: писти към Pera di Fassa и обратно по дълги сини трасета"
+        },
+        {
+          "time": "16:30",
+          "description": "Край на деня – обратно в Канацей"
+        }
+      ],
+      "area": "Belvedere / Col Rodella",
+      "featured": false,
+      "date": "Събота · 28 Февруари",
       "vertical": "~1,200 м денивелация",
+      "title": "Вал ди Фаса – Запознанство с района",
       "difficulty": "Сини/Червени",
-      "featured": false
+      "day": "Ден 1"
     },
     {
-      "day": "Ден 2",
-      "date": "Неделя · 1 Март",
-      "title": "Арабба – Черните писти и Мармолада",
-      "area": "Arabba / Marmolada",
-      "steps": [
-        { "time": "08:30", "description": "Ранен старт – лифт Belvedere → Pordoi (2,239 м) → Arabba (1,602 м) по Sella Ronda маршрут (посока Оранжева)" },
-        { "time": "10:00", "description": "Arabba – най-стръмните писти в Доломитите; черни писти Burz и Porta Vescovo (2,478 м)" },
-        { "time": "12:00", "description": "Обяд в Arabba" },
-        { "time": "13:30", "description": "Гондола към Marmolada (3,265 м) – най-високата точка на Dolomiti Superski, глетчерски ски" },
-        { "time": "15:30", "description": "Обратно към Канацей по Pordoi и Belvedere" }
-      ],
       "km": "~30 км писти",
+      "steps": [
+        {
+          "time": "08:30",
+          "description": "Ранен старт – лифт Belvedere → Pordoi (2,239 м) → Arabba (1,602 м) по Sella Ronda маршрут (посока Оранжева)"
+        },
+        {
+          "time": "10:00",
+          "description": "Arabba – най-стръмните писти в Доломитите; черни писти Burz и Porta Vescovo (2,478 м)"
+        },
+        {
+          "time": "12:00",
+          "description": "Обяд в Arabba"
+        },
+        {
+          "time": "13:30",
+          "description": "Гондола към Marmolada (3,265 м) – най-високата точка на Dolomiti Superski, глетчерски ски"
+        },
+        {
+          "time": "15:30",
+          "description": "Обратно към Канацей по Pordoi и Belvedere"
+        }
+      ],
+      "area": "Arabba / Marmolada",
+      "featured": false,
+      "date": "Неделя · 1 Март",
       "vertical": "~1,800 м денивелация",
+      "title": "Арабба – Черните писти и Мармолада",
       "difficulty": "Червени/Черни",
-      "featured": false
+      "day": "Ден 2"
     },
     {
-      "day": "Ден 3",
-      "date": "Понеделник · 2 Март",
-      "title": "Sella Ronda – Пълният кръг (Оранжева посока)",
-      "area": "Канацей → Арабба → Корвара → Селва → Канацей · ~26 км писти + 4 лифтни прехода",
-      "steps": [
-        { "time": "08:00", "description": "Ранен старт! Лифт Belvedere от Канацей – изкачване към Pordoi (2,239 м)" },
-        { "time": "08:45", "description": "Спускане към Arabba (1,602 м) – Pordoi писта, ~8 км" },
-        { "time": "09:30", "description": "Лифт Porta Vescovo от Arabba → прелез към Corvara (1,568 м)" },
-        { "time": "10:30", "description": "Обяд-пауза в Corvara / Colfosco" },
-        { "time": "11:00", "description": "Лифт Campolongo → Passo Gardena (2,136 м) → спускане към Selva Val Gardena (1,563 м)" },
-        { "time": "12:30", "description": "Обяд в Selva – препоръчваме Rifugio Jimmy" },
-        { "time": "14:00", "description": "Лифт Dantercepies → Passo Sella (2,244 м) → спускане обратно към Канацей" },
-        { "time": "16:00", "description": "Финал на кръга! Аперол Spritz в Канацей 🍊" }
-      ],
       "km": "~40 км писти",
+      "steps": [
+        {
+          "time": "08:00",
+          "description": "Ранен старт! Лифт Belvedere от Канацей – изкачване към Pordoi (2,239 м)"
+        },
+        {
+          "time": "08:45",
+          "description": "Спускане към Arabba (1,602 м) – Pordoi писта, ~8 км"
+        },
+        {
+          "time": "09:30",
+          "description": "Лифт Porta Vescovo от Arabba → прелез към Corvara (1,568 м)"
+        },
+        {
+          "time": "10:30",
+          "description": "Обяд-пауза в Corvara / Colfosco"
+        },
+        {
+          "time": "11:00",
+          "description": "Лифт Campolongo → Passo Gardena (2,136 м) → спускане към Selva Val Gardena (1,563 м)"
+        },
+        {
+          "time": "12:30",
+          "description": "Обяд в Selva – препоръчваме Rifugio Jimmy"
+        },
+        {
+          "time": "14:00",
+          "description": "Лифт Dantercepies → Passo Sella (2,244 м) → спускане обратно към Канацей"
+        },
+        {
+          "time": "16:00",
+          "description": "Финал на кръга! Аперол Spritz в Канацей 🍊"
+        }
+      ],
+      "area": "Канацей → Арабба → Корвара → Селва → Канацей · ~26 км писти + 4 лифтни прехода",
+      "featured": true,
+      "date": "Понеделник · 2 Март",
       "vertical": "~2,600 м денивелация",
+      "title": "Sella Ronda – Пълният кръг (Оранжева посока)",
       "difficulty": "4 прохода · ~7 часа",
-      "featured": true
+      "day": "Ден 3"
     },
     {
-      "day": "Ден 4",
-      "date": "Вторник · 3 Март",
-      "title": "Вал Гардена – Селва и Санта Кристина",
-      "area": "Val Gardena / Alpe di Siusi",
-      "steps": [
-        { "time": "08:30", "description": "От Канацей – лифт Passo Sella → Selva Val Gardena за цял ден" },
-        { "time": "09:30", "description": "Писти Ciampinoi (2,254 м) – дълги червени спускания с изглед към Sassolungo" },
-        { "time": "11:00", "description": "Разходка към Alpe di Siusi (Seiser Alm) – най-голямото алпийско плато в Европа" },
-        { "time": "13:00", "description": "Обяд в Compaccio / Compatsch на платото" },
-        { "time": "14:30", "description": "Обратно в Selva – следобед по писти Dantercepies" },
-        { "time": "16:30", "description": "Лифт обратно към Passo Sella → Канацей" }
-      ],
       "km": "~28 км писти",
+      "steps": [
+        {
+          "time": "08:30",
+          "description": "От Канацей – лифт Passo Sella → Selva Val Gardena за цял ден"
+        },
+        {
+          "time": "09:30",
+          "description": "Писти Ciampinoi (2,254 м) – дълги червени спускания с изглед към Sassolungo"
+        },
+        {
+          "time": "11:00",
+          "description": "Разходка към Alpe di Siusi (Seiser Alm) – най-голямото алпийско плато в Европа"
+        },
+        {
+          "time": "13:00",
+          "description": "Обяд в Compaccio / Compatsch на платото"
+        },
+        {
+          "time": "14:30",
+          "description": "Обратно в Selva – следобед по писти Dantercepies"
+        },
+        {
+          "time": "16:30",
+          "description": "Лифт обратно към Passo Sella → Канацей"
+        }
+      ],
+      "area": "Val Gardena / Alpe di Siusi",
+      "featured": false,
+      "date": "Вторник · 3 Март",
       "vertical": "~1,400 м денивелация",
+      "title": "Вал Гардена – Селва и Санта Кристина",
       "difficulty": "Сини/Червени",
-      "featured": false
+      "day": "Ден 4"
     },
     {
-      "day": "Ден 5",
-      "date": "Сряда · 4 Март",
-      "title": "Вал ди Фаса – Последен ден, любими писти",
-      "area": "Belvedere / Buffaure / Ciampedie",
-      "steps": [
-        { "time": "09:00", "description": "Свободен ден – всеки избира любимите си писти от седмицата" },
-        { "time": "09:30", "description": "Препоръка: Кабинков лифт Ciampedie от Vigo di Fassa (2,000 м) – по-тихо, красиви гледки към Catinaccio" },
-        { "time": "11:00", "description": "Buffaure (2,354 м) – дълги, слабо натоварени червени и черни писти, любими от местните" },
-        { "time": "13:00", "description": "Прощален обяд в планинска хижа – препоръчваме Rifugio Gardeccia" },
-        { "time": "15:00", "description": "Последно спускане → събиране на екипировката" },
-        { "time": "16:30", "description": "Край на ски сезона 🎿 Celebrate!" }
-      ],
       "km": "~20 км писти",
+      "steps": [
+        {
+          "time": "09:00",
+          "description": "Свободен ден – всеки избира любимите си писти от седмицата"
+        },
+        {
+          "time": "09:30",
+          "description": "Препоръка: Кабинков лифт Ciampedie от Vigo di Fassa (2,000 м) – по-тихо, красиви гледки към Catinaccio"
+        },
+        {
+          "time": "11:00",
+          "description": "Buffaure (2,354 м) – дълги, слабо натоварени червени и черни писти, любими от местните"
+        },
+        {
+          "time": "13:00",
+          "description": "Прощален обяд в планинска хижа – препоръчваме Rifugio Gardeccia"
+        },
+        {
+          "time": "15:00",
+          "description": "Последно спускане → събиране на екипировката"
+        },
+        {
+          "time": "16:30",
+          "description": "Край на ски сезона 🎿 Celebrate!"
+        }
+      ],
+      "area": "Belvedere / Buffaure / Ciampedie",
+      "featured": false,
+      "date": "Сряда · 4 Март",
       "vertical": "~1,000 м денивелация",
+      "title": "Вал ди Фаса – Последен ден, любими писти",
       "difficulty": "Всички нива",
-      "featured": false
+      "day": "Ден 5"
     }
   ]
 }
