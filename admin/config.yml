@@ -107,3 +107,31 @@ collections:
               - { label: "Линк", name: "link", widget: "string", required: false }
               - { label: "Бележки", name: "notes", widget: "text", required: false }
           - { label: "Обща информация / Бележки", name: "notes", widget: "text", required: false }
+
+  - name: "skiplan"
+    label: "Ски план"
+    files:
+      - label: "5-дневен ски план"
+        name: "skiplan"
+        file: "content/skiplan.json"
+        format: json
+        fields:
+          - { label: "Въведение", name: "intro", widget: "text" }
+          - label: "Дни"
+            name: "days"
+            widget: "list"
+            fields:
+              - { label: "Ден (напр. Ден 1)", name: "day", widget: "string" }
+              - { label: "Дата (напр. Събота · 28 Февруари)", name: "date", widget: "string" }
+              - { label: "Заглавие", name: "title", widget: "string" }
+              - { label: "Район / Ски зона", name: "area", widget: "string" }
+              - label: "Програма"
+                name: "steps"
+                widget: "list"
+                fields:
+                  - { label: "Час (напр. 09:00)", name: "time", widget: "string" }
+                  - { label: "Описание", name: "description", widget: "text" }
+              - { label: "Километри писти", name: "km", widget: "string", required: false }
+              - { label: "Денивелация", name: "vertical", widget: "string", required: false }
+              - { label: "Трудност / Бележка", name: "difficulty", widget: "string", required: false }
+              - { label: "Sella Ronda ден?", name: "featured", widget: "boolean", default: false }
