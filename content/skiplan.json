@@ -13,12 +13,12 @@
     },
     {
       "label": "Снежен отчет",
-      "url": "https://www.dolomitisuperski.com/en/mountain/snow-report",
+      "url": "https://www.dolomitisuperski.com/it/live-info/meteo",
       "icon": "❄️"
     },
     {
       "label": "Ски карта (PDF)",
-      "url": "https://www.dolomitisuperski.com/en/ski-area/ski-map",
+      "url": "https://www.dolomitisuperski.com/en/live-info/ski-map",
       "icon": "🗺️"
     }
   ],
