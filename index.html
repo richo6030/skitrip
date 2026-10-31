@@ -861,18 +861,36 @@
 
 <script>
   // ── Theme toggle ───────────────────────────────────────
+  function getSofiaHour() {
+    return new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Sofia' })).getHours();
+  }
+
+  function applyTheme(isLight) {
+    document.documentElement.classList.toggle('light', isLight);
+    const lbl = document.getElementById('themeLabel');
+    if (lbl) lbl.textContent = isLight ? '🌙 Тъмна тема' : '☀️ Светла тема';
+  }
+
   function toggleTheme() {
     const isLight = document.documentElement.classList.toggle('light');
     document.getElementById('themeLabel').textContent = isLight ? '🌙 Тъмна тема' : '☀️ Светла тема';
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    localStorage.setItem('themeOverride', isLight ? 'light' : 'dark');
   }
 
   (function() {
-    if (localStorage.getItem('theme') === 'light') {
-      document.documentElement.classList.add('light');
-      const btn = document.getElementById('themeLabel');
-      if (btn) btn.textContent = '🌙 Тъмна тема';
+    const override = localStorage.getItem('themeOverride');
+    if (override) {
+      applyTheme(override === 'light');
+    } else {
+      const h = getSofiaHour();
+      applyTheme(h >= 7 && h < 17);
     }
+    setInterval(() => {
+      if (!localStorage.getItem('themeOverride')) {
+        const h = getSofiaHour();
+        applyTheme(h >= 7 && h < 17);
+      }
+    }, 60000);
   })();
 
   // ── Navigation ──────────────────────────────────────────
