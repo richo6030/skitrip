@@ -610,25 +610,6 @@
 
     .overlay.show { display: block; }
 
-    .stop-map-thumb {
-      display: block;
-      width: 100%;
-      border-radius: 8px;
-      overflow: hidden;
-      margin-bottom: .85rem;
-      border: 1px solid var(--border);
-    }
-
-    .stop-map-thumb img {
-      width: 100%;
-      height: 130px;
-      object-fit: cover;
-      display: block;
-      transition: opacity .2s;
-    }
-
-    .stop-map-thumb:hover img { opacity: .85; }
-
     /* ── Route one-pager enhancements ── */
     .route-summary {
       display: flex;
@@ -1116,7 +1097,6 @@
       el.innerHTML = `<div class="empty-state"><div class="empty-icon">🗺️</div><p>Маршрутът все още не е добавен.<br/>Добави спирки от <a href="/admin" style="color:var(--accent)">Admin панела</a>.</p></div>`;
       return;
     }
-    const MAPS_KEY = 'AIzaSyAoWGAGpTyadQzlgwd1QO_uSg0lqc2cS5A';
     el.innerHTML = `<div class="timeline">${data.stops.map(stop => {
       const t  = typeMap[stop.type] || typeMap['Почивка'];
       const tc = typeClass[stop.type] || 'type-stop';
@@ -1125,19 +1105,9 @@
         : '';
       const notes = stop.notes
         ? `<div class="stop-notes">${stop.notes}</div>` : '';
-      const thumb = (stop.lat && stop.lng)
-        ? `<a href="${stop.maps_link || `https://www.google.com/maps?q=${stop.lat},${stop.lng}`}" target="_blank" class="stop-map-thumb">
-            <img
-              src="https://maps.googleapis.com/maps/api/staticmap?center=${stop.lat},${stop.lng}&zoom=11&size=320x140&scale=2&maptype=roadmap&markers=color:red%7C${stop.lat},${stop.lng}&style=element:geometry%7Ccolor:0x1d2535&style=element:labels.text.fill%7Ccolor:0x8b949e&style=element:labels.text.stroke%7Ccolor:0x1d2535&style=feature:road%7Celement:geometry%7Ccolor:0x30363d&style=feature:road.highway%7Celement:geometry%7Ccolor:0x4a9eff&style=feature:water%7Celement:geometry%7Ccolor:0x0d1117&key=${MAPS_KEY}"
-              alt="${stop.name}"
-              loading="lazy"
-            />
-          </a>`
-        : '';
       return `
         <div class="timeline-item ${tc}">
           <div class="timeline-card">
-            ${thumb}
             <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;">
               <div class="stop-name">${t.icon} ${stop.name}${stop.country ? ` <span style="font-weight:400;color:var(--muted);font-size:.85rem;">· ${stop.country}</span>` : ''}</div>
               <span class="stop-type-badge ${t.badge}">${stop.type}</span>
