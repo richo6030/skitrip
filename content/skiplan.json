@@ -2,11 +2,6 @@
   "intro": "Хотел Grifone Dolomiti Resort се намира в Канацей, Вал ди Фаса — директен достъп до лифтовете Belvedere и Col Rodella, които са основни входни точки към веригата Sella Ronda. Dolomiti Superski свързва 12 ски района, 1200 км писти и над 450 лифта.",
   "links": [
     {
-      "label": "Sella Ronda официална страница",
-      "url": "https://www.dolomitisuperski.com/en/ski-area/the-sella-ronda",
-      "icon": "🔄"
-    },
-    {
       "label": "Уеб камери на писти",
       "url": "https://www.dolomitisuperski.com/it/live-info/webcam",
       "icon": "📷"
@@ -18,7 +13,7 @@
     },
     {
       "label": "Ски карта (PDF)",
-      "url": "https://www.dolomitisuperski.com/en/live-info/ski-map",
+      "url": "https://www.dolomitisuperski.com/en/live-info/ski-map/dolomiti-superski",
       "icon": "🗺️"
     }
   ],
