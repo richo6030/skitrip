@@ -117,6 +117,13 @@ collections:
         format: json
         fields:
           - { label: "Въведение", name: "intro", widget: "text" }
+          - label: "Полезни линкове"
+            name: "links"
+            widget: "list"
+            fields:
+              - { label: "Икона (emoji)", name: "icon", widget: "string", required: false }
+              - { label: "Текст на линка", name: "label", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
           - label: "Дни"
             name: "days"
             widget: "list"
