@@ -242,6 +242,104 @@
       line-height: 1;
     }
 
+    /* ── Snow easter egg ── */
+    .snowflake {
+      position: fixed;
+      top: -2rem;
+      font-size: 1.4rem;
+      animation: snowfall linear forwards;
+      pointer-events: none;
+      z-index: 9999;
+      user-select: none;
+    }
+
+    @keyframes snowfall {
+      0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    .snow-toast {
+      position: fixed;
+      top: 1.5rem; left: 50%; transform: translateX(-50%);
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 99px; padding: .55rem 1.25rem;
+      font-size: .82rem; color: var(--snow);
+      z-index: 9998; white-space: nowrap;
+      animation: toastIn .4s ease, toastOut .4s ease 2.6s forwards;
+      box-shadow: 0 8px 24px rgba(0,0,0,.3);
+    }
+
+    @keyframes toastIn  { from { opacity:0; transform: translateX(-50%) translateY(-10px); } to { opacity:1; transform: translateX(-50%) translateY(0); } }
+    @keyframes toastOut { from { opacity:1; } to { opacity:0; } }
+    .hero-ski-btn {
+      position: absolute;
+      bottom: 2rem; right: 3rem;
+      font-size: 6rem;
+      opacity: .07;
+      line-height: 1;
+      background: none; border: none; padding: 0;
+      cursor: default;
+      transition: opacity .2s, transform .2s;
+      user-select: none;
+    }
+    .hero-ski-btn:hover { opacity: .13; }
+    .hero-ski-btn.wiggle { animation: ski-wiggle .35s ease; }
+    @keyframes ski-wiggle {
+      0%   { transform: rotate(0deg) scale(1); }
+      25%  { transform: rotate(-15deg) scale(1.15); }
+      75%  { transform: rotate(12deg) scale(1.1); }
+      100% { transform: rotate(0deg) scale(1); }
+    }
+
+    .easter-egg-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 500;
+      background: rgba(0,0,0,.7);
+      backdrop-filter: blur(6px);
+      align-items: center; justify-content: center;
+    }
+    .easter-egg-overlay.show { display: flex; animation: fadeIn .3s ease; }
+
+    .easter-egg-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 2.25rem;
+      max-width: 420px; width: 90%;
+      position: relative;
+      box-shadow: 0 32px 80px rgba(0,0,0,.5);
+    }
+
+    .easter-egg-card .ee-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--snow);
+      margin-bottom: .25rem;
+    }
+
+    .easter-egg-card .ee-sub {
+      font-size: .78rem; color: var(--muted); margin-bottom: 1.5rem;
+    }
+
+    .ee-stat {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: .55rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: .88rem;
+    }
+    .ee-stat:last-of-type { border-bottom: none; }
+    .ee-stat .ee-label { color: var(--muted); }
+    .ee-stat .ee-val   { font-weight: 700; color: var(--snow); }
+
+    .ee-close {
+      margin-top: 1.5rem; width: 100%;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: .6rem;
+      color: var(--muted); font-size: .82rem; cursor: pointer;
+      font-family: var(--font-body); transition: all .15s;
+    }
+    .ee-close:hover { border-color: var(--accent); color: var(--accent); }
+
     .hero-eyebrow {
       display: inline-flex;
       align-items: center;
@@ -478,25 +576,105 @@
     .passengers-list li::before { content: '›'; color: var(--accent); font-size: .9rem; font-weight: 700; }
 
     /* ── Group ── */
-    .group-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: .75rem; }
+    .group-note {
+      background: color-mix(in srgb, var(--accent) 6%, var(--bg2));
+      border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .group-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
 
     .member-card {
       background: var(--bg2); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 1rem 1.2rem;
-      display: flex; align-items: center; gap: .85rem;
-      transition: background .25s, border-color .25s;
+      border-radius: var(--radius); padding: 1.25rem 1rem 1rem;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; gap: .6rem;
+      transition: background .25s, border-color .25s, transform .2s;
+      position: relative; overflow: hidden;
     }
 
-    .member-avatar {
-      width: 42px; height: 42px; border-radius: 50%;
+    .member-card:hover { transform: translateY(-3px); border-color: var(--accent); }
+
+    .member-card.admin-card {
+      border-color: color-mix(in srgb, var(--warn) 50%, transparent);
+      background: color-mix(in srgb, var(--warn) 4%, var(--bg2));
+      grid-column: span 2;
+      flex-direction: row;
+      text-align: left;
+      padding: 1.4rem 1.5rem;
+      gap: 1.25rem;
+      align-items: center;
+    }
+
+    .member-card.admin-card .member-photo-wrap {
+      width: 96px; height: 96px;
+      flex-shrink: 0;
+    }
+
+    .member-card.admin-card .member-name { font-size: 1.05rem; }
+    .member-card.admin-card .member-socials { justify-content: flex-start; margin-top: .5rem; }
+
+    .admin-info { display: flex; flex-direction: column; }
+
+    .member-card.admin-card:hover { border-color: var(--warn); }
+
+    .admin-badge {
+      position: absolute; top: .6rem; right: .6rem;
+      background: var(--warn);
+      color: #fff;
+      font-size: .57rem; font-weight: 800;
+      letter-spacing: .08em; text-transform: uppercase;
+      padding: .15rem .5rem; border-radius: 99px;
+      line-height: 1.4;
+    }
+
+    .member-photo-wrap {
+      width: 72px; height: 72px; border-radius: 50%;
+      overflow: hidden; flex-shrink: 0;
+      border: 2px solid var(--border);
+      transition: border-color .2s;
+    }
+
+    .member-card:hover .member-photo-wrap { border-color: var(--accent); }
+    .member-card.admin-card .member-photo-wrap { border-color: color-mix(in srgb, var(--warn) 50%, transparent); }
+
+    .member-photo-wrap img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+
+    .member-photo-fallback {
+      width: 100%; height: 100%;
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       display: flex; align-items: center; justify-content: center;
-      font-weight: 700; font-size: .9rem; color: #fff; flex-shrink: 0;
-      box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 30%, transparent);
+      font-weight: 700; font-size: 1.2rem; color: #fff;
     }
 
-    .member-name { font-weight: 700; font-size: .88rem; color: var(--snow); transition: color .25s; }
-    .member-role { font-size: .72rem; color: var(--muted); margin-top: .1rem; }
+    .member-name { font-weight: 700; font-size: .85rem; color: var(--snow); transition: color .25s; line-height: 1.3; }
+    .member-nickname { font-size: .72rem; color: var(--muted); font-style: italic; margin-top: .05rem; }
+
+    .member-socials {
+      display: flex; gap: .5rem; justify-content: center; margin-top: .35rem;
+    }
+
+    .social-link {
+      display: flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--bg3); border: 1px solid var(--border);
+      text-decoration: none; font-size: .85rem;
+      transition: all .15s;
+    }
+
+    .social-link:hover { background: var(--accent); border-color: var(--accent); transform: scale(1.1); }
+    .social-link.fb:hover { background: #1877f2; border-color: #1877f2; }
+    .social-link.fb:hover svg { fill: #fff; }
+    .social-link.ig:hover { background: #e1306c; border-color: #e1306c; }
+    .social-link.ig:hover svg { fill: #fff; }
+    .social-link svg { width: 14px; height: 14px; fill: var(--muted); transition: fill .15s; }
 
     /* ── Ski passes ── */
     .passes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
@@ -519,26 +697,197 @@
     .pass-card .pass-notes { font-size: .78rem; color: var(--muted); line-height: 1.55; margin-top: .5rem; }
 
     /* ── Accommodation ── */
-    .accommodation-hero {
+    .accom-photo-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 200px 200px;
+      gap: .5rem;
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .accom-photo-grid img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .3s ease, opacity .2s;
+    }
+
+    .accom-photo-grid img:hover { transform: scale(1.03); opacity: .9; }
+
+    .accom-photo-grid .photo-main {
+      grid-row: 1 / 3;
+    }
+
+    .accom-hero-card {
       background: linear-gradient(135deg,
-        color-mix(in srgb, var(--accent) 8%, var(--bg2)),
-        color-mix(in srgb, var(--accent2) 6%, var(--bg2)));
+        color-mix(in srgb, var(--accent) 10%, var(--bg2)),
+        color-mix(in srgb, var(--accent2) 7%, var(--bg2)));
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 2rem; margin-bottom: 1.5rem;
-      position: relative; overflow: hidden;
+      padding: 1.75rem 2rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
       transition: background .25s, border-color .25s;
     }
 
-    .accommodation-hero::after {
-      content: '🏔️'; position: absolute;
-      right: 1.5rem; top: 50%; transform: translateY(-50%);
-      font-size: 4rem; opacity: .12;
+    .accom-hero-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      color: var(--snow);
+      margin-bottom: .4rem;
+      transition: color .25s;
     }
 
-    .accommodation-hero h3 {
-      font-family: var(--font-display);
-      font-size: 1.5rem; color: var(--snow); margin-bottom: .5rem; transition: color .25s;
+    .accom-dates {
+      display: flex;
+      gap: .75rem;
+      flex-wrap: wrap;
+      margin-top: .75rem;
+    }
+
+    .accom-date-chip {
+      background: color-mix(in srgb, var(--bg) 50%, transparent);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: .4rem .8rem;
+      font-size: .78rem;
+    }
+
+    .accom-date-chip .lbl {
+      display: block;
+      font-size: .65rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      font-weight: 600;
+      margin-bottom: .1rem;
+    }
+
+    .accom-date-chip .val { color: var(--snow); font-weight: 700; transition: color .25s; }
+
+    .accom-price-box {
+      background: color-mix(in srgb, var(--accent3) 10%, var(--bg3));
+      border: 1px solid color-mix(in srgb, var(--accent3) 30%, transparent);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.4rem;
+      min-width: 200px;
+      flex-shrink: 0;
+      transition: background .25s, border-color .25s;
+    }
+
+    .accom-price-box .price-label {
+      font-size: .68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--accent3);
+      margin-bottom: .5rem;
+    }
+
+    .accom-price-box .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: .3rem;
+    }
+
+    .accom-price-box .price-row .pr-name { font-size: .82rem; color: var(--muted); }
+    .accom-price-box .price-row .pr-val  { font-size: .95rem; font-weight: 700; color: var(--snow); transition: color .25s; }
+    .accom-price-box .price-row.total    { border-top: 1px solid var(--border); padding-top: .4rem; margin-top: .3rem; }
+    .accom-price-box .price-row.total .pr-val { color: var(--accent3); font-size: 1.1rem; }
+
+    .rooms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: .85rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .room-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.25rem;
+      position: relative;
+      overflow: hidden;
+      transition: background .25s, border-color .25s;
+    }
+
+    .room-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+
+    .room-card .room-type { font-weight: 700; font-size: .9rem; color: var(--snow); margin-bottom: .3rem; transition: color .25s; }
+    .room-card .room-cap  { font-size: .72rem; font-weight: 700; color: var(--accent); margin-bottom: .4rem; }
+    .room-card .room-desc { font-size: .78rem; color: var(--muted); line-height: 1.55; }
+
+    .iban-card {
+      background: color-mix(in srgb, var(--accent) 6%, var(--bg2));
+      border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+      transition: background .25s, border-color .25s;
+    }
+
+    .iban-card .iban-label {
+      font-size: .68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--accent);
+      margin-bottom: .3rem;
+    }
+
+    .iban-card .iban-value {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--snow);
+      letter-spacing: .04em;
+      font-family: monospace;
+      transition: color .25s;
+    }
+
+    .iban-card .iban-name { font-size: .82rem; color: var(--muted); margin-top: .2rem; }
+
+    .amenities-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .amenity-chip {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: .3rem .85rem;
+      font-size: .78rem;
+      color: var(--text);
+      font-weight: 500;
+      transition: background .25s, border-color .25s, color .25s;
+    }
+
+    @media (max-width: 768px) {
+      .accom-photo-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 160px 120px 120px; }
+      .accom-photo-grid .photo-main { grid-row: auto; }
     }
 
     /* ── Empty state ── */
@@ -722,6 +1071,7 @@
       <h1 id="hero-title">Ски Трип<br/>Доломити 2027</h1>
       <p class="hero-tagline" id="hero-tagline">Шест дни в Алпите. Едно незабравимо приключение.</p>
       <div class="date-badges" id="date-badges"></div>
+      <button class="hero-ski-btn" id="skiBtn" onclick="skiClick()" title="">⛷️</button>
     </div>
 
     <div style="padding: 2rem 3rem 0;">
@@ -863,6 +1213,23 @@
     <div id="skiplan-content"></div>
   </section>
 </main>
+
+<!-- Easter egg overlay -->
+<div class="easter-egg-overlay" id="easterEgg" onclick="closeEasterEgg()">
+  <div class="easter-egg-card" onclick="event.stopPropagation()">
+    <div class="ee-title">🍊 Честито!</div>
+    <div class="ee-sub">Намери си Easter Egg-а</div>
+    <div style="text-align:center; padding: 1.5rem 0 1rem;">
+      <div style="font-size: 4rem; margin-bottom: .75rem;">🥂</div>
+      <div style="font-family: var(--font-display); font-size: 1.25rem; color: var(--snow); margin-bottom: .5rem;">Спечели безплатен Aperol Spritz</div>
+      <div style="font-size: .88rem; color: var(--muted); line-height: 1.7;">на après-ski бара<br/>от <span style="color: var(--warn); font-weight: 700;">Вожда</span> лично 🎿</div>
+    </div>
+    <div style="background: color-mix(in srgb, var(--warn) 8%, var(--bg3)); border: 1px dashed color-mix(in srgb, var(--warn) 40%, transparent); border-radius: var(--radius-sm); padding: .75rem 1rem; text-align:center; font-size:.75rem; color:var(--muted); margin-bottom: 1rem;">
+      Важи само веднъж · Не може да се прехвърли · Вожда си запазва правото да се преструва, че не знае за това
+    </div>
+    <button class="ee-close" onclick="closeEasterEgg()">не казвай на никой · направи screenshot и покажи на Вожда</button>
+  </div>
+</div>
 
 <script>
   // ── Theme toggle ───────────────────────────────────────
@@ -1032,20 +1399,81 @@
       return;
     }
     const a = trip.accommodation;
-    const mapsBtn = a.maps_link
-      ? `<a href="${a.maps_link}" target="_blank" class="maps-link" style="margin-top:.75rem;display:inline-flex;">📍 Виж на Google Maps</a>`
-      : '';
-    el.innerHTML = `
-      <div class="accommodation-hero">
-        <h3>${a.name}</h3>
-        ${a.address ? `<p style="color:var(--muted);font-size:.9rem;margin-top:.3rem;">📍 ${a.address}</p>` : ''}
-        ${mapsBtn}
-      </div>
-      <div class="info-grid">
-        ${a.checkin  ? `<div class="info-item"><div class="label">Check-in</div><div class="value">${a.checkin}</div></div>` : ''}
-        ${a.checkout ? `<div class="info-item"><div class="label">Check-out</div><div class="value">${a.checkout}</div></div>` : ''}
-        ${a.notes    ? `<div class="card" style="margin-top:1rem;grid-column:1/-1;"><h3>Бележки</h3><p style="color:var(--muted);font-size:.875rem;line-height:1.7;">${a.notes}</p></div>` : ''}
+
+    const photos = [
+      { src: 'https://www.grifonedolomitiresort.com/wp-content/uploads/2026/04/P1311171-Copia-1024x768.jpg', alt: 'Хотел екстериор', main: true },
+      { src: 'https://www.grifonedolomitiresort.com/wp-content/uploads/2026/01/P1300759-1024x768.jpg', alt: 'Хотел изглед' },
+      { src: 'https://www.grifonedolomitiresort.com/wp-content/uploads/2026/01/P1311141-1024x768.jpg', alt: 'Хотел интериор' },
+      { src: 'https://www.grifonedolomitiresort.com/wp-content/uploads/2026/06/bar-vista3-812x1024.jpg', alt: 'Бар с изглед' },
+      { src: 'https://www.grifonedolomitiresort.com/wp-content/uploads/2026/06/sauna-residence-1024x683.jpg', alt: 'Сауна' },
+    ];
+
+    const photoGrid = `
+      <div class="accom-photo-grid">
+        ${photos.map((p, i) => `<img src="${p.src}" alt="${p.alt}" loading="lazy" class="${p.main ? 'photo-main' : ''}" />`).join('')}
       </div>`;
+
+    const amenities = [
+      { icon: '🚌', label: 'Безплатен ски шатъл до Campolongo' },
+      { icon: '🅿️', label: 'Безплатен външен паркинг' },
+      { icon: '🧖', label: 'Сауна и турска баня' },
+      { icon: '🏊', label: 'Закрит басейн' },
+      { icon: '💪', label: 'Фитнес зала' },
+      { icon: '🎿', label: 'Ски стаи за екипировка' },
+      { icon: '🐾', label: 'Домашни любимци' },
+      { icon: '🎮', label: 'Sala Grifone (игри/почивка)' },
+    ];
+
+    const rooms = (a.rooms || []).map(r => `
+      <div class="room-card">
+        <div class="room-type">${r.type}</div>
+        <div class="room-cap">👥 ${r.capacity} души</div>
+        <div class="room-desc">${r.description}</div>
+      </div>`).join('');
+
+    el.innerHTML = `
+      ${photoGrid}
+
+      <div class="accom-hero-card">
+        <div>
+          <h3>${a.name}</h3>
+          ${a.address ? `<p style="color:var(--muted);font-size:.85rem;margin-top:.25rem;">📍 ${a.address}</p>` : ''}
+          ${a.maps_link ? `<a href="${a.maps_link}" target="_blank" class="maps-link" style="margin-top:.5rem;display:inline-flex;">📍 Виж на Google Maps</a>` : ''}
+          <div class="accom-dates">
+            ${a.checkin  ? `<div class="accom-date-chip"><span class="lbl">Check-in</span><span class="val">${a.checkin}</span></div>` : ''}
+            ${a.checkout ? `<div class="accom-date-chip"><span class="lbl">Check-out</span><span class="val">${a.checkout}</span></div>` : ''}
+          </div>
+        </div>
+        ${a.price_per_person ? `
+        <div class="accom-price-box">
+          <div class="price-label">💶 Цена на човек</div>
+          <div class="price-row"><span class="pr-name">Нощувки</span><span class="pr-val">${a.price_per_person} €</span></div>
+          ${a.breakfast_price ? `<div class="price-row"><span class="pr-name">Закуска (по желание)</span><span class="pr-val">${a.breakfast_price} €</span></div>` : ''}
+          ${a.total_with_breakfast ? `<div class="price-row total"><span class="pr-name">Общо със закуска</span><span class="pr-val">${a.total_with_breakfast} €</span></div>` : ''}
+        </div>` : ''}
+      </div>
+
+      ${a.iban ? `
+      <div class="iban-card">
+        <div>
+          <div class="iban-label">🏦 Банков превод</div>
+          <div class="iban-value">${a.iban}</div>
+          <div class="iban-name">${a.iban_name || ''} · ${a.price_per_person ? a.price_per_person + ' € на човек' : ''}</div>
+        </div>
+      </div>` : ''}
+
+      ${rooms ? `
+      <h3 style="font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.75rem;">🛏️ Настаняване</h3>
+      <div class="rooms-grid">${rooms}</div>` : ''}
+
+      <h3 style="font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.75rem;">✨ Удобства</h3>
+      <div class="amenities-grid">
+        ${amenities.map(a => `<div class="amenity-chip">${a.icon} ${a.label}</div>`).join('')}
+      </div>
+
+      ${a.services_link ? `<a href="${a.services_link}" target="_blank" class="maps-link" style="margin-top:.5rem;">🔗 Ресторант, барове и услуги на хотела</a>` : ''}
+      ${a.notes ? `<div class="card" style="margin-top:1.25rem;"><p style="color:var(--muted);font-size:.85rem;line-height:1.7;">${a.notes}</p></div>` : ''}
+    `;
   }
 
   function renderCars(data) {
@@ -1076,18 +1504,50 @@
       el.innerHTML = `<div class="empty-state"><div class="empty-icon">👥</div><p>Участниците ще бъдат добавени скоро.<br/>Добави от <a href="/admin" style="color:var(--accent)">Admin панела</a>.</p></div>`;
       return;
     }
-    el.innerHTML = `<div class="group-grid">${data.members.map(m => {
+
+    const note = data.group_chat_note
+      ? `<div class="group-note">💬 ${data.group_chat_note}</div>`
+      : '';
+
+    const cards = data.members.map(m => {
       const initials = m.name.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+      const photoEl = m.photo
+        ? `<img src="${m.photo}" alt="${m.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=member-photo-fallback>${initials}</div>'">`
+        : `<div class="member-photo-fallback">${initials}</div>`;
+
+      const fb = m.facebook
+        ? `<a href="${m.facebook}" target="_blank" class="social-link fb" title="Facebook"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a>` : '';
+      const ig = m.instagram
+        ? `<a href="${m.instagram}" target="_blank" class="social-link ig" title="Instagram"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>` : '';
+
+      const adminBadge = m.admin ? `<div class="admin-badge">Admin</div>` : '';
+      const nickname = m.nickname ? `<div class="member-nickname">"${m.nickname}"</div>` : '';
+      const socials = (fb || ig) ? `<div class="member-socials">${fb}${ig}</div>` : '';
+
+      if (m.admin) {
+        return `
+          <div class="member-card admin-card">
+            ${adminBadge}
+            <div class="member-photo-wrap">${photoEl}</div>
+            <div class="admin-info">
+              <div class="member-name">${m.name}</div>
+              ${nickname}
+              ${socials}
+            </div>
+          </div>`;
+      }
+
       return `
         <div class="member-card">
-          <div class="member-avatar">${initials}</div>
-          <div>
-            <div class="member-name">${m.name}</div>
-            ${m.role  ? `<div class="member-role">${m.role}</div>` : ''}
-            ${m.phone ? `<div class="member-role">📞 ${m.phone}</div>` : ''}
-          </div>
+          ${adminBadge}
+          <div class="member-photo-wrap">${photoEl}</div>
+          <div class="member-name">${m.name}</div>
+          ${nickname}
+          ${socials}
         </div>`;
-    }).join('')}</div>`;
+    }).join('');
+
+    el.innerHTML = note + `<div class="group-grid">${cards}</div>`;
   }
 
   function renderSkiPasses(data) {
@@ -1170,6 +1630,64 @@
     renderGroup(group);
     renderSkiPasses(skipasses);
     renderSkiPlan(skiplan);
+  }
+
+  // ── Snow easter egg (triple-tap hero) ─────────────────
+  let tapCount = 0, tapTimer = null;
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('.hero').addEventListener('touchend', () => {
+      tapCount++;
+      clearTimeout(tapTimer);
+      if (tapCount >= 3) {
+        tapCount = 0;
+        triggerSnow();
+      } else {
+        tapTimer = setTimeout(() => { tapCount = 0; }, 600);
+      }
+    });
+  });
+
+  function triggerSnow() {
+    const flakes = ['❄️','🌨️','⛄','❅','✦'];
+    const toast = document.createElement('div');
+    toast.className = 'snow-toast';
+    toast.textContent = '❄️ Вали сняг в Доломитите!';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3200);
+
+    for (let i = 0; i < 40; i++) {
+      setTimeout(() => {
+        const el = document.createElement('div');
+        el.className = 'snowflake';
+        el.textContent = flakes[Math.floor(Math.random() * flakes.length)];
+        el.style.left = Math.random() * 100 + 'vw';
+        el.style.fontSize = (1 + Math.random() * 1.2) + 'rem';
+        const dur = 2.5 + Math.random() * 3;
+        el.style.animationDuration = dur + 's';
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), dur * 1000);
+      }, Math.random() * 1500);
+    }
+  }
+
+  // ── Easter egg ─────────────────────────────────────────
+  let skiClicks = 0, skiTimer = null;
+  function skiClick() {
+    const btn = document.getElementById('skiBtn');
+    btn.classList.remove('wiggle');
+    void btn.offsetWidth;
+    btn.classList.add('wiggle');
+    skiClicks++;
+    clearTimeout(skiTimer);
+    if (skiClicks >= 7) {
+      skiClicks = 0;
+      setTimeout(() => document.getElementById('easterEgg').classList.add('show'), 200);
+    } else {
+      skiTimer = setTimeout(() => { skiClicks = 0; }, 3000);
+    }
+  }
+  function closeEasterEgg() {
+    document.getElementById('easterEgg').classList.remove('show');
   }
 
   init();

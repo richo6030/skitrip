@@ -9,11 +9,39 @@
   },
   "accommodation": {
     "name": "Grifone Dolomiti Resort",
-    "address": "",
-    "maps_link": "",
-    "checkin": "",
-    "checkout": "",
-    "notes": ""
+    "address": "Passo Campolongo, 27, 32020 Livinallongo del Col di Lana BL, Италия",
+    "maps_link": "https://www.google.com/maps?q=46.5112017,11.8753396",
+    "checkin": "27.02.2027",
+    "checkout": "06.03.2027",
+    "notes": "Хотелът разполага с безплатен шатъл до лифт Campolongo (Sella Ronda), безплатен външен паркинг и платен вътрешен паркинг. Wellness зона със сауна и турска баня, закрит басейн, фитнес и ски стаи за съхранение на екипировка.",
+    "price_per_person": "615",
+    "breakfast_price": "126",
+    "total_with_breakfast": "741",
+    "iban": "BG74STSA93000022112624",
+    "iban_name": "Христо Рикев",
+    "services_link": "https://www.grifonedolomitiresort.com/en/servizi-2/",
+    "rooms": [
+      {
+        "type": "Premium апартамент с 2 спални",
+        "capacity": 6,
+        "description": "Спалня с двойно легло, спалня с две двуетажни легла, 2 бани"
+      },
+      {
+        "type": "Superior апартамент с 2 спални",
+        "capacity": 4,
+        "description": "Спалня с двойно легло, спалня с двуетажно легло, 1 баня"
+      },
+      {
+        "type": "Superior апартамент с 1 спалня",
+        "capacity": 4,
+        "description": "Спалня с двойно легло и двуетажно легло, 2 бани"
+      },
+      {
+        "type": "Superior студио",
+        "capacity": 2,
+        "description": "Двойно легло, 1 баня"
+      }
+    ]
   },
   "hero_tagline": "Шест дни в Алпите. Едно незабравимо приключение."
 }

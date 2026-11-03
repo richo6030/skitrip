@@ -1,3 +1,125 @@
 {
-  "members": []
+  "members": [
+    {
+      "name": "Христо Рикев",
+      "nickname": "Вожда",
+      "photo": "/assets/photos/HristoRikev(Vojda).png",
+      "facebook": "https://www.facebook.com/hristo.rikev",
+      "instagram": "https://www.instagram.com/hristorikev/",
+      "admin": true
+    },
+    {
+      "name": "Антоний Миленкински",
+      "nickname": "Тонката",
+      "photo": "/assets/photos/AntoniyMilenkinski(Tonkata).jpg",
+      "facebook": "https://www.facebook.com/antoniy.milenkinski",
+      "instagram": "https://www.instagram.com/tonkata_milenkinski/",
+      "admin": false
+    },
+    {
+      "name": "Даниел",
+      "nickname": "Елмо",
+      "photo": "/assets/photos/Daniel(Elmo).jpg",
+      "facebook": "https://www.facebook.com/daniel.georgiev.357",
+      "instagram": "https://www.instagram.com/elmo_ski/",
+      "admin": false
+    },
+    {
+      "name": "Емо Алексиев",
+      "nickname": "",
+      "photo": "/assets/photos/EmoAlexiev.png",
+      "facebook": "https://www.facebook.com/emo.alexiev",
+      "instagram": "https://www.instagram.com/emo_alexiev/",
+      "admin": false
+    },
+    {
+      "name": "Христиан Зарков",
+      "nickname": "",
+      "photo": "/assets/photos/HristianZarkov.jpg",
+      "facebook": "https://www.facebook.com/hristian.zarkov",
+      "instagram": "https://www.instagram.com/hristianzarkov/",
+      "admin": false
+    },
+    {
+      "name": "Илиян Чавдаров",
+      "nickname": "",
+      "photo": "/assets/photos/IliyanChavdarov.jpg",
+      "facebook": "https://www.facebook.com/iliyan.chavdarov",
+      "instagram": "https://www.instagram.com/iliyan_chavdarov/",
+      "admin": false
+    },
+    {
+      "name": "Константин Лупов",
+      "nickname": "",
+      "photo": "/assets/photos/KostantinLupov.jpg",
+      "facebook": "https://www.facebook.com/konstantin.lupov",
+      "instagram": "https://www.instagram.com/konstantinlupov/",
+      "admin": false
+    },
+    {
+      "name": "Михаил Шлюкарски",
+      "nickname": "",
+      "photo": "/assets/photos/Mihail_Schlyukarski.jpg",
+      "facebook": "https://www.facebook.com/mihail.schlyukarski",
+      "instagram": "https://www.instagram.com/mihail_schlyukarski/",
+      "admin": false
+    },
+    {
+      "name": "Тони Рикева",
+      "nickname": "Mrs. Rikeva",
+      "photo": "/assets/photos/Mrs.Rikeva(Toni).jpg",
+      "facebook": "https://www.facebook.com/toni.rikeva",
+      "instagram": "https://www.instagram.com/toni.rikeva/",
+      "admin": false
+    },
+    {
+      "name": "Светослав Вълков",
+      "nickname": "",
+      "photo": "/assets/photos/SvetoslavValkov.png",
+      "facebook": "",
+      "instagram": "https://www.instagram.com/svetoslav_valkov/",
+      "admin": false
+    },
+    {
+      "name": "Веси Кръстева",
+      "nickname": "",
+      "photo": "/assets/photos/VesiKrusteva.jpg",
+      "facebook": "https://www.facebook.com/vessi.krastevaa",
+      "instagram": "https://www.instagram.com/vessiik/",
+      "admin": false
+    },
+    {
+      "name": "Явор Младенов",
+      "nickname": "",
+      "photo": "/assets/photos/YavorMladenov.jpg",
+      "facebook": "https://www.facebook.com/yamladenov",
+      "instagram": "",
+      "admin": false
+    },
+    {
+      "name": "Александър Найденов",
+      "nickname": "",
+      "photo": "/assets/photos/alexandar.naydenov.png",
+      "facebook": "https://www.facebook.com/SnowMan.vr",
+      "instagram": "https://www.instagram.com/alexandar.naydenov",
+      "admin": false
+    },
+    {
+      "name": "Габриела Айгарова",
+      "nickname": "Габи",
+      "photo": "/assets/photos/gabriella_aygarova(Gabi).png",
+      "facebook": "https://www.facebook.com/gabriela.aygarova",
+      "instagram": "https://www.instagram.com/gabriella_aygarova/",
+      "admin": false
+    },
+    {
+      "name": "Натали Калинова",
+      "nickname": "",
+      "photo": "/assets/photos/nataliya.kalinova.png",
+      "facebook": "https://www.facebook.com/nataliya.kalinova",
+      "instagram": "https://www.instagram.com/nataliya.kalinova/",
+      "admin": false
+    }
+  ],
+  "group_chat_note": "За да бъдеш добавен/а към груповите чатове във Facebook или Instagram, свържи се с администратора — Христо Рикев (Вожда)."
 }

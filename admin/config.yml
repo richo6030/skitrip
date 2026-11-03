@@ -81,13 +81,17 @@ collections:
         file: "content/group.json"
         format: json
         fields:
+          - { label: "Бележка за груповите чатове", name: "group_chat_note", widget: "text", required: false }
           - label: "Участници"
             name: "members"
             widget: "list"
             fields:
-              - { label: "Име", name: "name", widget: "string" }
-              - { label: "Роля / Бележка", name: "role", widget: "string", required: false }
-              - { label: "Телефон", name: "phone", widget: "string", required: false }
+              - { label: "Пълно Име", name: "name", widget: "string" }
+              - { label: "Прякор", name: "nickname", widget: "string", required: false }
+              - { label: "Снимка (път напр. /assets/photos/Ime.jpg)", name: "photo", widget: "string", required: false }
+              - { label: "Facebook URL", name: "facebook", widget: "string", required: false }
+              - { label: "Instagram URL", name: "instagram", widget: "string", required: false }
+              - { label: "Администратор?", name: "admin", widget: "boolean", default: false }
 
   - name: "skipasses"
     label: "Ски карти"
