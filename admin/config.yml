@@ -107,10 +107,13 @@ collections:
             fields:
               - { label: "Вид карта", name: "name", widget: "string" }
               - { label: "Дни", name: "days", widget: "number", required: false }
-              - { label: "Цена (approx.)", name: "price", widget: "string", required: false }
+              - { label: "Цена", name: "price", widget: "string", required: false }
               - { label: "Линк", name: "link", widget: "string", required: false }
               - { label: "Бележки", name: "notes", widget: "text", required: false }
+              - { label: "Препоръчана?", name: "recommended", widget: "boolean", default: false }
           - { label: "Обща информация / Бележки", name: "notes", widget: "text", required: false }
+          - { label: "App Store линк (iOS)", name: "app_ios", widget: "string", required: false }
+          - { label: "Google Play линк (Android)", name: "app_android", widget: "string", required: false }
 
   - name: "skiplan"
     label: "Ски план"

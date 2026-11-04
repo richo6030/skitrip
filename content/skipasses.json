@@ -1,4 +1,32 @@
 {
-  "passes": [],
-  "notes": ""
+  "passes": [
+    {
+      "name": "Dolomiti Superski · 5 дни",
+      "days": 5,
+      "price": "374 € онлайн (394 € на каса)",
+      "link": "https://www.dolomitisuperski.com/en/ski-pass/ski-passes",
+      "notes": "Препоръчителна карта за групата. Важи за 5 последователни дни в цялата зона Dolomiti Superski. Купи онлайн и спести 20 €.",
+      "recommended": true
+    },
+    {
+      "name": "Dolomiti Superski · 5 от 6 дни",
+      "days": 6,
+      "price": "414 € онлайн (436 € на каса)",
+      "link": "https://www.dolomitisuperski.com/en/ski-pass/ski-passes",
+      "notes": "Гъвкав вариант — ползваш 5 дни по избор от 6-дневен период.",
+      "recommended": false
+    },
+    {
+      "name": "Dolomiti Superski · 6 дни",
+      "days": 6,
+      "price": "430 € онлайн (453 € на каса)",
+      "link": "https://www.dolomitisuperski.com/en/ski-pass/ski-passes",
+      "notes": "За тези, които искат да карат всеки ден без почивка.",
+      "recommended": false
+    }
+  ],
+  "notes": "Всички цени са за 1 възрастен, сезон 2026/27. При онлайн покупка се спестяват между 20–23 €. Картите важат в цялата зона Dolomiti Superski — 1,200 км писти, 12 долини.",
+  "website": "https://www.dolomitisuperski.com/en/",
+  "app_ios": "https://apps.apple.com/de/app/my-dolomiti-winter/id1483954376?l=en-GB",
+  "app_android": "https://play.google.com/store/apps/details?id=com.dolomitisuperski.skiapp&hl=de&gl=US"
 }

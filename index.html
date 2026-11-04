@@ -232,15 +232,7 @@
       pointer-events: none;
     }
 
-    .hero::after {
-      content: '⛷️';
-      position: absolute;
-      bottom: 2rem; right: 3rem;
-      font-size: 6rem;
-      opacity: .07;
-      pointer-events: none;
-      line-height: 1;
-    }
+    .hero::after { display: none; }
 
     /* ── Snow easter egg ── */
     .snowflake {
@@ -890,7 +882,34 @@
       .accom-photo-grid .photo-main { grid-row: auto; }
     }
 
-    /* ── Empty state ── */
+    .pass-card.recommended {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 25%, transparent),
+                  0 8px 32px color-mix(in srgb, var(--accent) 10%, transparent);
+    }
+
+    .pass-recommended-badge {
+      display: inline-flex; align-items: center; gap: .3rem;
+      font-size: .65rem; font-weight: 800; letter-spacing: .08em;
+      text-transform: uppercase;
+      background: color-mix(in srgb, var(--accent) 15%, transparent);
+      color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+      padding: .18rem .6rem; border-radius: 99px; margin-bottom: .6rem;
+    }
+
+    .app-links-row {
+      display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1.5rem;
+    }
+
+    .app-link-btn {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: .6rem 1rem;
+      text-decoration: none; color: var(--text); font-size: .82rem; font-weight: 600;
+      transition: all .15s;
+    }
+
+    .app-link-btn:hover { border-color: var(--accent); color: var(--accent); }
     .empty-state { text-align: center; padding: 3rem 1rem; color: var(--muted); }
     .empty-state .empty-icon { font-size: 2.5rem; margin-bottom: 1rem; }
     .empty-state p { font-size: .88rem; line-height: 1.65; }
@@ -1029,6 +1048,7 @@
       .hamburger { display: block; }
       section { padding: 4rem 1.25rem 2rem; }
       .hero { padding: 4rem 1.5rem 3rem; }
+      .hero-ski-btn { font-size: 3.5rem; bottom: auto; top: .75rem; right: 1.25rem; opacity: .1; }
       .home-cards { padding: 1.5rem 1.25rem; }
       .skiday-grid { grid-template-columns: 1fr; }
       .skiday-card--featured { grid-column: auto; }
@@ -1557,17 +1577,30 @@
       return;
     }
     const notesBlock = data.notes
-      ? `<div class="card" style="margin-bottom:1.5rem;"><h3>Обща информация</h3><p style="color:var(--muted);font-size:.875rem;line-height:1.7;white-space:pre-line;">${data.notes}</p></div>`
+      ? `<div class="card" style="margin-bottom:1.5rem;"><h3>Обща информация</h3><p style="color:var(--muted);font-size:.875rem;line-height:1.7;white-space:pre-line;">${data.notes}</p>
+          ${data.website ? `<a href="${data.website}" target="_blank" class="app-link-btn" style="margin-top:1rem;display:inline-flex;">🌐 Официален сайт на Dolomiti Superski</a>` : ''}
+        </div>`
       : '';
     const passes = (data.passes || []).map(p => `
-      <div class="pass-card">
+      <div class="pass-card${p.recommended ? ' recommended' : ''}">
+        ${p.recommended ? '<div class="pass-recommended-badge">⭐ Препоръчана</div>' : ''}
         <div class="pass-name">${p.name}</div>
         ${p.days  ? `<div class="pass-days">⏱ ${p.days} ${p.days == 1 ? 'ден' : 'дни'}</div>` : ''}
         ${p.price ? `<div class="pass-price">${p.price}</div>` : ''}
         ${p.link  ? `<a href="${p.link}" target="_blank" class="maps-link">🔗 Купи / Виж детайли</a>` : ''}
         ${p.notes ? `<div class="pass-notes">${p.notes}</div>` : ''}
       </div>`).join('');
-    el.innerHTML = notesBlock + (passes ? `<div class="passes-grid">${passes}</div>` : '');
+
+    const appLinks = (data.app_ios || data.app_android) ? `
+      <div style="margin-top:1.75rem;">
+        <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.75rem;">📱 MyDolomiti App</div>
+        <div class="app-links-row">
+          ${data.app_ios ? `<a href="${data.app_ios}" target="_blank" class="app-link-btn">🍎 App Store (iOS)</a>` : ''}
+          ${data.app_android ? `<a href="${data.app_android}" target="_blank" class="app-link-btn">🤖 Google Play (Android)</a>` : ''}
+        </div>
+      </div>` : '';
+
+    el.innerHTML = notesBlock + (passes ? `<div class="passes-grid">${passes}</div>` : '') + appLinks;
   }
 
   function renderSkiPlan(data) {
@@ -1635,7 +1668,8 @@
   // ── Snow easter egg (triple-tap hero) ─────────────────
   let tapCount = 0, tapTimer = null;
   document.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('.hero').addEventListener('touchend', () => {
+    document.querySelector('.hero').addEventListener('touchend', (e) => {
+      if (e.target.id === 'skiBtn') return;
       tapCount++;
       clearTimeout(tapTimer);
       if (tapCount >= 3) {
