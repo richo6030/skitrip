@@ -914,6 +914,87 @@
     .empty-state .empty-icon { font-size: 2.5rem; margin-bottom: 1rem; }
     .empty-state p { font-size: .88rem; line-height: 1.65; }
 
+    /* ── Pack list ── */
+    .pack-progress-bar {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .pack-progress-bar .prog-header {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: .6rem;
+    }
+
+    .pack-progress-bar .prog-label { font-size: .82rem; font-weight: 700; color: var(--snow); }
+    .pack-progress-bar .prog-count { font-size: .78rem; color: var(--muted); }
+
+    .prog-track {
+      height: 6px; background: var(--border); border-radius: 99px; overflow: hidden;
+    }
+
+    .prog-fill {
+      height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent3));
+      border-radius: 99px; transition: width .4s ease;
+    }
+
+    .pack-category { margin-bottom: 1.5rem; }
+
+    .pack-category-title {
+      font-size: .72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .09em; color: var(--muted);
+      margin-bottom: .6rem; padding-bottom: .4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pack-items { display: flex; flex-direction: column; gap: .35rem; }
+
+    .pack-item {
+      display: flex; align-items: center; gap: .85rem;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: .7rem 1rem;
+      cursor: pointer; transition: all .15s; user-select: none;
+    }
+
+    .pack-item:hover { border-color: var(--accent); }
+
+    .pack-item.done {
+      opacity: .55;
+      background: color-mix(in srgb, var(--accent3) 5%, var(--bg2));
+      border-color: color-mix(in srgb, var(--accent3) 25%, transparent);
+    }
+
+    .pack-checkbox {
+      width: 20px; height: 20px; border-radius: 6px; flex-shrink: 0;
+      border: 2px solid var(--border); background: var(--bg3);
+      display: flex; align-items: center; justify-content: center;
+      transition: all .15s; font-size: .75rem;
+    }
+
+    .pack-item.done .pack-checkbox {
+      background: var(--accent3); border-color: var(--accent3); color: #fff;
+    }
+
+    .pack-item-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+    .pack-item-label {
+      font-size: .88rem; color: var(--text); font-weight: 500; flex: 1;
+      transition: color .15s;
+    }
+
+    .pack-item.done .pack-item-label {
+      text-decoration: line-through; color: var(--muted);
+    }
+
+    .pack-reset-btn {
+      background: none; border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: .45rem 1rem;
+      font-size: .78rem; color: var(--muted); cursor: pointer;
+      font-family: var(--font-body); transition: all .15s;
+    }
+
+    .pack-reset-btn:hover { border-color: var(--warn); color: var(--warn); }
+
     /* ── Countdown ── */
     .countdown-strip { display: flex; gap: .85rem; flex-wrap: wrap; margin-bottom: 2rem; }
 
@@ -1073,6 +1154,7 @@
     <li><a href="#" onclick="showSection('group')" data-section="group"><span class="icon">👥</span> Група</a></li>
     <li><a href="#" onclick="showSection('skipasses')" data-section="skipasses"><span class="icon">🎿</span> Ски карти</a></li>
     <li><a href="#" onclick="showSection('skiplan')" data-section="skiplan"><span class="icon">⛷️</span> Ски план</a></li>
+    <li><a href="#" onclick="showSection('packlist')" data-section="packlist"><span class="icon">🎒</span> Списък за багаж</a></li>
   </ul>
   <div class="nav-bottom">
     <a href="/admin" target="_blank">⚙️ Admin панел</a>
@@ -1129,6 +1211,11 @@
         <div class="card-icon">⛷️</div>
         <div class="card-title">Ски план</div>
         <div class="card-desc">5-дневен план с маршрути, Sella Ronda и полезни линкове.</div>
+      </a>
+      <a class="home-card" onclick="showSection('packlist')">
+        <div class="card-icon">🎒</div>
+        <div class="card-title">Списък за багаж</div>
+        <div class="card-desc">Списък с екипировка и лични вещи — маркирай за себе си.</div>
       </a>
     </div>
   </section>
@@ -1231,7 +1318,18 @@
       </div>
     </div>
     <div id="skiplan-content"></div>
+  </section>  <!-- PACK LIST -->
+  <section id="packlist">
+    <div class="section-header">
+      <div class="section-icon">🎒</div>
+      <div>
+        <h2>Списък за багаж</h2>
+        <p>Лична проверка — запазена само на твоето устройство</p>
+      </div>
+    </div>
+    <div id="packlist-content"></div>
   </section>
+
 </main>
 
 <!-- Easter egg overlay -->
@@ -1663,6 +1761,133 @@
     renderGroup(group);
     renderSkiPasses(skipasses);
     renderSkiPlan(skiplan);
+    renderPackList();
+  }
+
+  // ── Pack list ──────────────────────────────────────────
+  const PACK_LIST = [
+    { category: '🎿 Ски екипировка', items: [
+      { id: 'ski_boots',   icon: '👢', label: 'Ски обувки' },
+      { id: 'ski_helmet',  icon: '⛑️', label: 'Каска' },
+      { id: 'ski_goggles', icon: '🥽', label: 'Ски очила' },
+      { id: 'ski_gloves',  icon: '🧤', label: 'Ски ръкавици' },
+      { id: 'ski_jacket',  icon: '🧥', label: 'Ски яке' },
+      { id: 'ski_pants',   icon: '👖', label: 'Ски панталон' },
+      { id: 'ski_socks',   icon: '🧦', label: 'Ски чорапи (2-3 чифта)' },
+      { id: 'ski_neck',    icon: '🧣', label: 'Шалче / балаклава' },
+      { id: 'ski_base',    icon: '👕', label: 'Термо бельо (горе и долу)' },
+      { id: 'ski_mid',     icon: '🧤', label: 'Поларен пуловер / mid-layer' },
+    ]},
+    { category: '🏔️ Апре-ски и вечер', items: [
+      { id: 'apres_boots', icon: '👟', label: 'Обувки за апре-ски / вечер' },
+      { id: 'apres_warm',  icon: '🧥', label: 'Топло яке за вечер' },
+      { id: 'apres_casual',icon: '👕', label: 'Ежедневни дрехи (5-6 дни)' },
+      { id: 'apres_pj',    icon: '🩲', label: 'Пижама / нощни дрехи' },
+    ]},
+    { category: '🧴 Тоалетни принадлежности', items: [
+      { id: 'toilet_sun',  icon: '🌞', label: 'Слънцезащитен крем SPF 50+' },
+      { id: 'toilet_lip',  icon: '💄', label: 'Балсам за устни с UV защита' },
+      { id: 'toilet_basic',icon: '🪥', label: 'Четка, паста, шампоан' },
+      { id: 'toilet_meds', icon: '💊', label: 'Лични лекарства' },
+      { id: 'toilet_pain', icon: '💊', label: 'Болкоуспокояващи / ибупрофен' },
+      { id: 'toilet_plast',icon: '🩹', label: 'Лепенки / малка аптечка' },
+    ]},
+    { category: '📱 Техника и документи', items: [
+      { id: 'tech_passport',icon: '🛂', label: 'Паспорт / лична карта' },
+      { id: 'tech_insurance',icon:'🏥', label: 'Здравна застраховка' },
+      { id: 'tech_phone',  icon: '📱', label: 'Телефон + зарядно' },
+      { id: 'tech_power',  icon: '🔋', label: 'Преносима батерия' },
+      { id: 'tech_adapter',icon: '🔌', label: 'EU адаптер (ако е нужен)' },
+      { id: 'tech_cash',   icon: '💶', label: 'Евро в брой' },
+      { id: 'tech_card',   icon: '💳', label: 'Банкова карта' },
+    ]},
+    { category: '🚗 За пътуването', items: [
+      { id: 'car_snacks',  icon: '🍫', label: 'Снаксове за пътя' },
+      { id: 'car_water',   icon: '💧', label: 'Вода' },
+      { id: 'car_pillow',  icon: '😴', label: 'Възглавничка / маска за сън' },
+      { id: 'car_vignette',icon: '🛣️', label: 'Проверени винетки (Сърбия, Словения)' },
+    ]},
+    { category: '✨ Бонус (препоръчително)', items: [
+      { id: 'bonus_backpack',icon:'🎒', label: 'Малка раница за ски деня' },
+      { id: 'bonus_hand',  icon: '🧴', label: 'Крем за ръце' },
+      { id: 'bonus_goggle_spare', icon:'🥽', label: 'Резервни очила или визьор' },
+      { id: 'bonus_warmers',icon:'🔥', label: 'Топлинки за ръце / крака' },
+    ]},
+  ];
+
+  const PACK_KEY = 'skitrip_packlist_2027';
+
+  function loadPackState() {
+    try { return JSON.parse(localStorage.getItem(PACK_KEY)) || {}; }
+    catch { return {}; }
+  }
+
+  function savePackState(state) {
+    localStorage.setItem(PACK_KEY, JSON.stringify(state));
+  }
+
+  function togglePackItem(id) {
+    const state = loadPackState();
+    state[id] = !state[id];
+    savePackState(state);
+    const el = document.querySelector(`.pack-item[data-id="${id}"]`);
+    if (el) {
+      el.classList.toggle('done', state[id]);
+      el.querySelector('.pack-checkbox').textContent = state[id] ? '✓' : '';
+    }
+    updatePackProgress();
+  }
+
+  function updatePackProgress() {
+    const state = loadPackState();
+    const total = PACK_LIST.reduce((sum, cat) => sum + cat.items.length, 0);
+    const done  = PACK_LIST.reduce((sum, cat) => sum + cat.items.filter(i => state[i.id]).length, 0);
+    const pct   = total ? Math.round(done / total * 100) : 0;
+    const fill  = document.getElementById('prog-fill');
+    const count = document.getElementById('prog-count');
+    if (fill)  fill.style.width = pct + '%';
+    if (count) count.textContent = `${done} / ${total} готови`;
+  }
+
+  function resetPackList() {
+    if (!confirm('Изчисти целия списък?')) return;
+    localStorage.removeItem(PACK_KEY);
+    renderPackList();
+  }
+
+  function renderPackList() {
+    const el = document.getElementById('packlist-content');
+    const state = loadPackState();
+    const total = PACK_LIST.reduce((sum, cat) => sum + cat.items.length, 0);
+    const done  = PACK_LIST.reduce((sum, cat) => sum + cat.items.filter(i => state[i.id]).length, 0);
+    const pct   = total ? Math.round(done / total * 100) : 0;
+
+    const categories = PACK_LIST.map(cat => `
+      <div class="pack-category">
+        <div class="pack-category-title">${cat.category}</div>
+        <div class="pack-items">
+          ${cat.items.map(item => `
+            <div class="pack-item${state[item.id] ? ' done' : ''}" data-id="${item.id}" onclick="togglePackItem('${item.id}')">
+              <div class="pack-checkbox">${state[item.id] ? '✓' : ''}</div>
+              <div class="pack-item-icon">${item.icon}</div>
+              <div class="pack-item-label">${item.label}</div>
+            </div>`).join('')}
+        </div>
+      </div>`).join('');
+
+    el.innerHTML = `
+      <div class="pack-progress-bar">
+        <div class="prog-header">
+          <span class="prog-label">${pct === 100 ? '🎉 Готов за ски!' : '📦 Прогрес на опаковането'}</span>
+          <span id="prog-count" class="prog-count">${done} / ${total} готови</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:${pct}%"></div></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap;gap:.5rem;">
+        <p style="font-size:.8rem;color:var(--muted);">Отбелязаното се пази само на твоето устройство.</p>
+        <button class="pack-reset-btn" onclick="resetPackList()">↺ Изчисти всичко</button>
+      </div>
+      ${categories}`;
   }
 
   // ── Snow easter egg (triple-tap hero) ─────────────────
